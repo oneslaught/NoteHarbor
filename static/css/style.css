@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0f1117;
+    color: #ffffff;
+    display: flex;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background-color: #1a1d27;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.sidebar .logo {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #ffffff;
+}
+
+.sidebar .logo span {
+    color: #4f8ef7;
+}
+
+.sidebar .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #9aa0b4;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.sidebar .nav-item:hover {
+    background-color: #23263a;
+    color: #ffffff;
+}
+
+.sidebar .nav-item.active {
+    background-color: #4f8ef7;
+    color: #ffffff;
+}
+
+.sidebar .user-info {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #2a2d3e;
+    font-size: 14px;
+    color: #9aa0b4;
+}
+
+/* Main content */
+.main {
+    margin-left: 240px;
+    flex: 1;
+    padding: 32px;
+}
+
+/* Topbar */
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.topbar input {
+    flex: 1;
+    max-width: 400px;
+    padding: 10px 16px;
+    background-color: #1a1d27;
+    border: 1px solid #2a2d3e;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.topbar input::placeholder {
+    color: #9aa0b4;
+}
+
+/* Cards */
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.note-card {
+    background-color: #1a1d27;
+    border: 1px solid #2a2d3e;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.2s;
+}
+
+.note-card:hover {
+    border-color: #4f8ef7;
+}
+
+.note-card .course-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.course-badge-1 { background-color: #4f8ef7; } /* blue */
+.course-badge-2 { background-color: #e05252; } /* red */
+.course-badge-3 { background-color: #3ab87a; } /* green */
+.course-badge-4 { background-color: #9b59b6; } /* purple */
+.course-badge-5 { background-color: #e67e22; } /* orange */
+.course-badge-6 { background-color: #e91e8c; } /* pink */
+
+.note-card .note-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.note-card .note-meta {
+    font-size: 13px;
+    color: #9aa0b4;
+}
+
+.note-card .note-stats {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: #9aa0b4;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #2a2d3e;
+}

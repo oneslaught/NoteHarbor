@@ -1,15 +1,31 @@
 {% extends 'base.html' %}
 
-{% block title %}Home — NoteHarbor{% endblock %}
+{% block nav_home %}active{% endblock %}
+
+{% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>Recent notes</h1>
-{% for note in notes %}
-    <div>
-        <h3>{{ note.title }}</h3>
-        <p>by {{ note.author.username }} · {{ note.course.name }}</p>
+<div class="topbar">
+    <input type="text" placeholder="Search notes...">
+</div>
+
+<h1 style="margin-bottom: 24px;">Recent notes</h1>
+
+<div class="notes-grid">
+    {% for note in notes %}
+    <div class="note-card">
+        <div>
+            <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
+        </div>
+        <div class="note-title">{{ note.title }}</div>
+        <div class="note-meta">by {{ note.author.username }} · {{ note.created_at|timesince }} ago</div>
+        <div class="note-stats">
+            <span>⭐ {{ note.average_rating|default:"—" }}</span>
+            <span>🔀 {{ note.fork_count }} forks</span>
+        </div>
     </div>
-{% empty %}
+    {% empty %}
     <p>No notes yet.</p>
-{% endfor %}
+    {% endfor %}
+</div>
 {% endblock %}
