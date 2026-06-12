@@ -16,8 +16,7 @@
             </div>
             <h1>{{ note.title }}</h1>
             <p class="note-author">
-                by <span>{{ note.author.username }}</span> · {{ note.created_at|timesince
-                }} ago
+                by <span>{{ note.author.username }}</span> · {{ note.created_at|timesince }} ago
             </p>
             <div class="note-content">{{ note.content|linebreaks }}</div>
             <div class="note-footer">
