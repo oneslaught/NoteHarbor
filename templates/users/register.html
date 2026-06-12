@@ -1,10 +1,28 @@
 {% extends "base.html" %}
 {% block title %}Register{% endblock title %}
 {% block content %}
-    <h1>Register</h1>
-    <form method="post">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
-    <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+    <div class="auth-page">
+        <div class="auth-card">
+            <h1>Create account</h1>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <div class="help-text">{{ field.help_text }}</div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+            <div class="auth-link">
+                Already have an account? <a href="{% url 'login' %}">Log in</a>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

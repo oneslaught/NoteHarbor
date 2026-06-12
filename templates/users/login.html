@@ -1,10 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock title %}
 {% block content %}
-    <h1>Login</h1>
-    <form method="post">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="{% url "register" %}">Register</a></p>
+    <div class="auth-page">
+        <div class="auth-card">
+            <h1>Welcome back</h1>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="submit-btn">Log in</button>
+            </form>
+            <div class="auth-link">
+                Don't have an account? <a href="{% url 'register' %}">Register</a>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
