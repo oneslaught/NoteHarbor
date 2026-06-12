@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Home — NoteHarbor{% endblock %}
+
+{% block content %}
+<h1>Recent notes</h1>
+{% for note in notes %}
+    <div>
+        <h3>{{ note.title }}</h3>
+        <p>by {{ note.author.username }} · {{ note.course.name }}</p>
+    </div>
+{% empty %}
+    <p>No notes yet.</p>
+{% endfor %}
+{% endblock %}
