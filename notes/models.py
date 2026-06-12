@@ -9,7 +9,6 @@ class Course(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='tags')
 
     def __str__(self):
         return self.name
