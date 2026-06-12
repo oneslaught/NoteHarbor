@@ -13,17 +13,17 @@
 
 <div class="notes-grid">
     {% for note in notes %}
-    <div class="note-card">
-        <div>
-            <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
-        </div>
-        <div class="note-title">{{ note.title }}</div>
-        <div class="note-meta">by {{ note.author.username }} · {{ note.created_at|timesince }} ago</div>
-        <div class="note-stats">
-            <span>⭐ {{ note.average_rating|default:"—" }}</span>
-            <span>🔀 {{ note.fork_count }} forks</span>
-        </div>
+    <a href="{% url 'note_detail' note.pk %}" class="note-card">
+    <div>
+        <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
     </div>
+    <div class="note-title">{{ note.title }}</div>
+    <div class="note-meta">by {{ note.author.username }} · {{ note.created_at|timesince }} ago</div>
+    <div class="note-stats">
+        <span>⭐ {{ note.average_rating|default:"—" }}</span>
+        <span>🔀 {{ note.fork_count }} forks</span>
+    </div>
+</a>
     {% empty %}
     <p>No notes yet.</p>
     {% endfor %}
