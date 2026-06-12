@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
-{% block title %}Register{% endblock %}
+{% extends "base.html" %}
+{% block title %}Register{% endblock title %}
 {% block
     content %}
     <h1>Register</h1>
@@ -8,4 +8,4 @@
         <button type="submit">Register</button>
     </form>
     <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
-{% endblock %}
+{% endblock content %}

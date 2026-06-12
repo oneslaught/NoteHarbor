@@ -103,6 +103,10 @@ a {
 }
 
 /* Cards */
+.recent-notes-title {
+    margin-bottom: 24px;
+}
+
 .notes-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
