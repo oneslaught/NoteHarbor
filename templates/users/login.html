@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
-
-{% block title %}Login — NoteHarbor{% endblock %}
-
-{% block content %}
+{% block title %}Login{% endblock %}
+{%
+block content %}
 <h1>Login</h1>
 <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+    {% csrf_token %} {{ form.as_p }}
     <button type="submit">Login</button>
 </form>
 <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>

@@ -1,61 +1,52 @@
 {% extends 'base.html' %}
-
-{% block title %}{{ note.title }} — NoteHarbor{% endblock %}
-
-{% block content %}
-<div class="note-detail">
-    <a href="{% url 'home' %}" class="back-link">← Back</a>
-
-    <div class="note-body">
-        <div class="note-body-header">
-            <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
-            {% if note.is_fork %}
-            <span class="fork-info">🔀 forked from
-                <a href="{% url 'note_detail' note.original_note.pk %}">{{ note.original_note.title }}</a>
-            </span>
-            {% endif %}
-        </div>
-
-        <h1>{{ note.title }}</h1>
-
-        <p class="note-author">
-            by <span>{{ note.author.username }}</span> · {{ note.created_at|timesince }} ago
-        </p>
-
-        <div class="note-content">
-            {{ note.content|linebreaks }}
-        </div>
-
-        <div class="note-footer">
-            <span class="rating">⭐ {{ note.average_rating|default:"No ratings yet" }}</span>
-            <span class="forks">🔀 {{ note.fork_count }} forks</span>
-        </div>
-    </div>
-
-    <div class="note-sidebar">
-        {% if request.user.is_authenticated %}
-        <div class="sidebar-card">
-            <h3>Actions</h3>
-            <a href="#" class="action-btn primary">⭐ Save to favorites</a>
-            <a href="#" class="action-btn">🔀 Fork this note</a>
-        </div>
-        {% endif %}
-
-        <div class="sidebar-card">
-            <h3>Tags</h3>
-            <div class="tags-list">
-                {% for tag in note.tags.all %}
-                <span class="tag">{{ tag.name }}</span>
-                {% empty %}
-                <span class="tag">No tags</span>
-                {% endfor %}
+{% block title %}
+    {{ note.title }} — NoteHarbor{%
+    endblock %}
+    {% block content %}
+        <div class="note-detail">
+            <a href="{% url 'home' %}" class="back-link">← Back</a>
+            <div class="note-body">
+                <div class="note-body-header">
+                    <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
+                    {% if note.is_fork %}
+                        <span class="fork-info">🔀 forked from
+                            <a href="{% url 'note_detail' note.original_note.pk %}">{{ note.original_note.title }}</a>
+                        </span>
+                    {% endif %}
+                </div>
+                <h1>{{ note.title }}</h1>
+                <p class="note-author">
+                    by <span>{{ note.author.username }}</span> · {{ note.created_at|timesince
+                    }} ago
+                </p>
+                <div class="note-content">{{ note.content|linebreaks }}</div>
+                <div class="note-footer">
+                    <span class="rating">⭐ {{ note.average_rating|default:"No ratings yet" }}</span>
+                    <span class="forks">🔀 {{ note.fork_count }} forks</span>
+                </div>
+            </div>
+            <div class="note-sidebar">
+                {% if request.user.is_authenticated %}
+                    <div class="sidebar-card">
+                        <h3>Actions</h3>
+                        <a href="#" class="action-btn primary">⭐ Save to favorites</a>
+                        <a href="#" class="action-btn">🔀 Fork this note</a>
+                    </div>
+                {% endif %}
+                <div class="sidebar-card">
+                    <h3>Tags</h3>
+                    <div class="tags-list">
+                        {% for tag in note.tags.all %}
+                            <span class="tag">{{ tag.name }}</span>
+                        {% empty %}
+                            <span class="tag">No tags</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="sidebar-card">
+                    <h3>Info</h3>
+                    <div class="tag">📅 {{ note.created_at|date:"d M Y" }}</div>
+                </div>
             </div>
         </div>
-
-        <div class="sidebar-card">
-            <h3>Info</h3>
-            <div class="tag">📅 {{ note.created_at|date:"d M Y" }}</div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+    {% endblock %}

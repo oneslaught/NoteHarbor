@@ -1,35 +1,34 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}NoteHarbor{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <div class="sidebar">
-        <div class="logo">Note<span>Harbor</span></div>
-        <a href="{% url 'home' %}" class="nav-item {% block nav_home %}{% endblock %}">Home</a>
-        <a href="#" class="nav-item {% block nav_explore %}{% endblock %}">Explore</a>
-        <a href="#" class="nav-item {% block nav_favorites %}{% endblock %}">Favorites</a>
-        <a href="#" class="nav-item {% block nav_forks %}{% endblock %}">My forks</a>
-        <a href="#" class="nav-item {% block nav_notes %}{% endblock %}">My notes</a>
-        <div class="user-info">
-            {% if request.user.is_authenticated %}
-                <div>{{ request.user.username }}</div>
-                <div>{{ request.user.profile.role|capfirst }}</div>
-                <a href="{% url 'logout' %}">Log out</a>
-            {% else %}
-                <a href="{% url 'login' %}">Log in</a>
-                <a href="{% url 'register' %}">Register</a>
-            {% endif %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}NoteHarbor{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div class="sidebar">
+            <div class="logo">Note<span>Harbor</span></div>
+            <a href="{% url 'home' %}"
+               class="nav-item {% block nav_home %}{% endblock %}">Home</a>
+            <a href="#" class="nav-item {% block nav_explore %}{% endblock %}">Explore</a>
+            <a href="#" class="nav-item {% block nav_favorites %}{% endblock %}">Favorites</a>
+            <a href="#" class="nav-item {% block nav_forks %}{% endblock %}">My forks</a>
+            <a href="#" class="nav-item {% block nav_notes %}{% endblock %}">My notes</a>
+            <div class="user-info">
+                {% if request.user.is_authenticated %}
+                    <div>{{ request.user.username }}</div>
+                    <div>{{ request.user.profile.role|capfirst }}</div>
+                    <a href="{% url 'logout' %}">Log out</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Log in</a>
+                    <a href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </div>
         </div>
-    </div>
-
-    <div class="main">
-        {% block content %}
-        {% endblock %}
-    </div>
-</body>
+        <div class="main">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
 </html>
