@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}My Notes{% endblock title %}
+{% block nav_notes %}active{% endblock nav_notes %}
+{% block content %}
+    <div class="topbar">
+        <input type="text" placeholder="Search notes...">
+    </div>
+    <h1>My notes</h1>
+    <p class="page-subtitle">{{ notes.count }} notes</p>
+    {% include "notes/partials/filters.html" %}
+    <div class="notes-grid">
+        {% for note in notes %}
+            <a href="{% url 'note_detail' note.pk %}" class="note-card">
+                <div>
+                    <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
+                </div>
+                <div class="note-title">{{ note.title }}</div>
+                <div class="note-meta">by {{ note.author.username }} · {{ note.created_at|timesince }} ago</div>
+                <div class="note-stats">
+                    <span>⭐ {{ note.average_rating|default:"—" }}</span>
+                    <span>🔀 {{ note.fork_count }} forks</span>
+                </div>
+            </a>
+        {% empty %}
+            <p>No notes yet.</p>
+        {% endfor %}
+    </div>
+{% endblock content %}

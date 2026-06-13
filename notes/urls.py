@@ -6,7 +6,9 @@ urlpatterns = [
     path('notes/<int:pk>/', views.note_detail_view, name='note_detail'),
     path('notes/<int:pk>/favorite/', views.toggle_favorite_view, name='toggle_favorite'),
     path('favorites/', views.favorites_view, name='favorites'),
+    path('explore/', views.explore_view, name='explore'),
     path('notes/<int:pk>/fork/', views.fork_note_view, name='fork_note'),
     path('my-forks/', views.my_forks_view, name='my_forks'),
+    path('my-notes/', views.my_notes_view, name='my_notes'),
     path('notes/<int:pk>/delete/', views.delete_note_view, name='delete_note'),
 ]

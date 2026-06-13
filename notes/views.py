@@ -63,7 +63,18 @@ def favorites_view(request):
         'current_course': request.GET.get('course'),
         'current_tag': request.GET.get('tag'),
     })
-
+    
+def explore_view(request):
+    notes = Note.objects.all().order_by('-created_at')
+    courses, tags = get_filter_context(notes)
+    notes = filter_notes(notes, request)
+    return render(request, 'notes/explore.html', {
+        'notes': notes,
+        'courses': courses,
+        'tags': tags,
+        'current_course': request.GET.get('course'),
+        'current_tag': request.GET.get('tag'),
+    })
 
 @login_required
 def fork_note_view(request, pk):
@@ -99,7 +110,19 @@ def my_forks_view(request):
         'current_course': request.GET.get('course'),
         'current_tag': request.GET.get('tag'),
     })
-
+    
+@login_required
+def my_notes_view(request):
+    notes = Note.objects.filter(author=request.user, original_note__isnull=True).order_by('-created_at')
+    courses, tags = get_filter_context(notes)
+    notes_filtered = filter_notes(notes, request)
+    return render(request, 'notes/my_notes.html', {
+        'notes': notes_filtered,
+        'courses': courses,
+        'tags': tags,
+        'current_course': request.GET.get('course'),
+        'current_tag': request.GET.get('tag'),
+    })
 
 @login_required
 def delete_note_view(request, pk):

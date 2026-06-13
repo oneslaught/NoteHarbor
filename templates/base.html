@@ -22,13 +22,13 @@
             <div class="logo">Note<span>Harbor</span></div>
             <a href="{% url 'home' %}"
                class="nav-item {% block nav_home %}{% endblock nav_home %}">Home</a>
-            <a href="#"
+            <a href="{% url 'explore' %}"
                class="nav-item {% block nav_explore %}{% endblock nav_explore %}">Explore</a>
             <a href="{% url 'favorites' %}"
                class="nav-item {% block nav_favorites %}{% endblock nav_favorites %}">Favorites</a>
             <a href="{% url 'my_forks' %}"
                class="nav-item {% block nav_forks %}{% endblock nav_forks %}">My forks</a>
-            <a href="#"
+            <a href="{% url 'my_notes' %}"
                class="nav-item {% block nav_notes %}{% endblock nav_notes %}">My notes</a>
             <div class="user-info">
                 {% if request.user.is_authenticated %}
