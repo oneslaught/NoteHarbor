@@ -1,0 +1,40 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 13px;
+  color: #9aa0b4;
+  min-width: 50px;
+}
+
+.filter-pill {
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid #2a2d3e;
+  background-color: #1a1d27;
+  color: #9aa0b4;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.filter-pill:hover {
+  border-color: #4f8ef7;
+  color: #ffffff;
+}
+
+.filter-pill.active {
+  background-color: #1d60d3;
+  border-color: #477edd;
+  color: #ffffff;
+}

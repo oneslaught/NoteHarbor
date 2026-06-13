@@ -1,48 +1,54 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #0f1117;
-    color: #ffffff;
-    display: flex;
-    min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #0f1117;
+  color: #ffffff;
+  display: flex;
+  min-height: 100vh;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 /* Main content */
 .main {
-    margin-left: 240px;
-    flex: 1;
-    padding: 32px;
+  margin-left: 240px;
+  flex: 1;
+  padding: 32px;
 }
 
 /* Topbar */
 .topbar {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
 .topbar input {
-    flex: 1;
-    max-width: 400px;
-    padding: 10px 16px;
-    background-color: #1a1d27;
-    border: 1px solid #2a2d3e;
-    border-radius: 8px;
-    color: #ffffff;
-    font-size: 14px;
+  flex: 1;
+  max-width: 400px;
+  padding: 10px 16px;
+  background-color: #1a1d27;
+  border: 1px solid #2a2d3e;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
 }
 
 .topbar input::placeholder {
+  color: #9aa0b4;
+}
+
+.page-subtitle {
     color: #9aa0b4;
+    font-size: 14px;
+    margin-top: 4px;
 }

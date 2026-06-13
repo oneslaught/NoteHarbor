@@ -1,138 +1,138 @@
 /* Note detail */
 .note-detail {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 24px;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 24px;
 }
 
 .note-detail .note-body {
-    align-self: start;
+  align-self: start;
 }
 
 .note-detail .back-link {
-    color: #9aa0b4;
-    font-size: 14px;
-    display: inline-block;
-    margin-bottom: 20px;
-    grid-column: 1 / -1;
+  color: #9aa0b4;
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: 20px;
+  grid-column: 1 / -1;
 }
 
 .note-detail .note-body {
-    background-color: #1a1d27;
-    border: 1px solid #2a2d3e;
-    border-radius: 16px;
-    padding: 32px;
+  background-color: #1a1d27;
+  border: 1px solid #2a2d3e;
+  border-radius: 16px;
+  padding: 32px;
 }
 
 .note-body-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .note-body h1 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .note-author {
-    color: #9aa0b4;
-    font-size: 14px;
-    margin-bottom: 28px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #2a2d3e;
+  color: #9aa0b4;
+  font-size: 14px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #2a2d3e;
 }
 
 .note-author span {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .note-content {
-    font-size: 16px;
-    line-height: 1.9;
-    color: #d0d4e0;
-    margin-bottom: 28px;
+  font-size: 16px;
+  line-height: 1.9;
+  color: #d0d4e0;
+  margin-bottom: 28px;
 }
 
 .note-footer {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding-top: 20px;
-    border-top: 1px solid #2a2d3e;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #2a2d3e;
 }
 
 .note-footer .rating {
-    font-size: 15px;
-    color: #f5c518;
+  font-size: 15px;
+  color: #f5c518;
 }
 
 .note-footer .forks {
-    font-size: 15px;
-    color: #9aa0b4;
+  font-size: 15px;
+  color: #9aa0b4;
 }
 
 .note-detail .note-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .note-detail .sidebar-card {
-    background-color: #1a1d27;
-    border: 1px solid #2a2d3e;
-    border-radius: 16px;
-    padding: 20px;
+  background-color: #1a1d27;
+  border: 1px solid #2a2d3e;
+  border-radius: 16px;
+  padding: 20px;
 }
 
 .note-detail .sidebar-card h3 {
-    font-size: 13px;
-    color: #9aa0b4;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 12px;
+  font-size: 13px;
+  color: #9aa0b4;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
 }
 
 .note-detail .tags-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .note-detail .tag {
-    padding: 4px 10px;
-    background-color: #23263a;
-    border: 1px solid #2a2d3e;
-    border-radius: 6px;
-    font-size: 13px;
-    color: #9aa0b4;
+  padding: 4px 10px;
+  background-color: #23263a;
+  border: 1px solid #2a2d3e;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #9aa0b4;
 }
 
 .note-detail .action-btn {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #2a2d3e;
-    background-color: #23263a;
-    color: #ffffff;
-    font-size: 14px;
-    cursor: pointer;
-    text-align: center;
-    display: block;
-    margin-bottom: 8px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #2a2d3e;
+  background-color: #23263a;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  margin-bottom: 8px;
 }
 
 .note-detail .action-btn:hover {
-    background-color: #2e3250;
+  background-color: #2e3250;
 }
 
 .note-detail .action-btn.primary {
-    background-color: #4f8ef7;
-    border-color: #4f8ef7;
+  background-color: #4f8ef7;
+  border-color: #4f8ef7;
 }
 
 .note-detail .action-btn.primary:hover {
-    background-color: #3a7be0;
+  background-color: #3a7be0;
 }

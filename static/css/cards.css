@@ -1,68 +1,80 @@
 /* Cards */
 .recent-notes-title {
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 }
 
 .notes-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
 a.note-card {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
 }
 
 .note-card {
-    background-color: #1a1d27;
-    border: 1px solid #2a2d3e;
-    border-radius: 12px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    transition: border-color 0.2s;
+  background-color: #1a1d27;
+  border: 1px solid #2a2d3e;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s;
 }
 
 .note-card:hover {
-    border-color: #4f8ef7;
+  border-color: #4f8ef7;
 }
 
 .course-badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #ffffff;
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.course-badge-1 { background-color: #4f8ef7; } /* blue */
-.course-badge-2 { background-color: #e05252; } /* red */
-.course-badge-3 { background-color: #3ab87a; } /* green */
-.course-badge-4 { background-color: #9b59b6; } /* purple */
-.course-badge-5 { background-color: #e67e22; } /* orange */
-.course-badge-6 { background-color: #e91e8c; } /* pink */
+.course-badge-1 {
+  background-color: #4f8ef7;
+} /* blue */
+.course-badge-2 {
+  background-color: #e05252;
+} /* red */
+.course-badge-3 {
+  background-color: #3ab87a;
+} /* green */
+.course-badge-4 {
+  background-color: #9b59b6;
+} /* purple */
+.course-badge-5 {
+  background-color: #e67e22;
+} /* orange */
+.course-badge-6 {
+  background-color: #e91e8c;
+} /* pink */
 
 .note-card .note-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .note-card .note-meta {
-    font-size: 13px;
-    color: #9aa0b4;
+  font-size: 13px;
+  color: #9aa0b4;
 }
 
 .note-card .note-stats {
-    display: flex;
-    gap: 16px;
-    font-size: 13px;
-    color: #9aa0b4;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid #2a2d3e;
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #9aa0b4;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #2a2d3e;
 }

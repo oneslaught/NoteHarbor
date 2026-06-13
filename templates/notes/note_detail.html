@@ -27,9 +27,22 @@
         <div class="note-sidebar">
             {% if request.user.is_authenticated %}
                 <div class="sidebar-card">
-                    <h3>Actions</h3>
-                    <a href="#" class="action-btn primary">⭐ Save to favorites</a>
-                    <a href="#" class="action-btn">🔀 Fork this note</a>
+                    {% if request.user.is_authenticated %}
+                        <div class="sidebar-card">
+                            <h3>Actions</h3>
+                            <form method="post" action="{% url 'toggle_favorite' note.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" class="action-btn primary">
+                                    {% if is_saved %}
+                                        ❌ Remove from favorites
+                                    {% else %}
+                                        🤍 Save to favorites
+                                    {% endif %}
+                                </button>
+                            </form>
+                            <a href="#" class="action-btn">🔀 Fork this note</a>
+                        </div>
+                    {% endif %}
                 </div>
             {% endif %}
             <div class="sidebar-card">
