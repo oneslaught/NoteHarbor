@@ -28,6 +28,20 @@ class Note(models.Model):
     def __str__(self):
         return self.title
     
+    @property
+    def is_fork(self):
+        return self.original_note is not None
+
+    @property
+    def fork_count(self):
+        return self.forks.count()
+
+    def average_rating(self):
+        ratings = self.ratings.all()
+        if not ratings:
+            return None
+        return round(sum(r.score for r in ratings) / len(ratings), 1)
+    
 class SavedNote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='saved_notes')
     note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='saved_by')

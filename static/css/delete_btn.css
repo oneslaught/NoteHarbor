@@ -1,0 +1,27 @@
+.btn-danger {
+  color: #e05252;
+  border-color: #e05252;
+  background-color: transparent;
+}
+
+.btn-danger:hover {
+  background-color: #e05252;
+  color: #ffffff;
+}
+
+.submit-btn-danger {
+  width: 100%;
+  padding: 12px;
+  background-color: #e05252;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.submit-btn-danger:hover {
+  background-color: #c0392b;
+}

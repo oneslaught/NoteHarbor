@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% block nav_home %}active{% endblock nav_home %}
-{% block title %}Home{% endblock title %}
+{% block title %}My Forks — NoteHarbor{% endblock title %}
+{% block nav_forks %}active{% endblock nav_forks %}
 {% block content %}
     <div class="topbar">
         <input type="text" placeholder="Search notes...">
     </div>
-    <h1>Recent notes</h1>
+    <h1>My forks</h1>
+    <p class="page-subtitle">{{ notes.count }} forked notes</p>
     {% include "notes/partials/filters.html" %}
     <div class="notes-grid">
         {% for note in notes %}
@@ -17,13 +18,11 @@
                 <div class="note-meta">by {{ note.author.username }} · {{ note.created_at|timesince }} ago</div>
                 <div class="note-stats">
                     <span>⭐ {{ note.average_rating|default:"—" }}</span>
-                    {% if not note.is_fork %}
-                        <span class="forks">🔀 {{ note.fork_count }} forks</span>
-                    {% endif %}
+                    <span>🔀 forked from {{ note.original_note.title }}</span>
                 </div>
             </a>
         {% empty %}
-            <p>No notes yet.</p>
+            <p>No forked notes yet.</p>
         {% endfor %}
     </div>
 {% endblock content %}

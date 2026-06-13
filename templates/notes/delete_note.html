@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Delete note{% endblock title %}
+{% block content %}
+    <div class="auth-page">
+        <div class="auth-card">
+            <h1>Delete note</h1>
+            <p class="page-subtitle">
+                Are you sure you want to delete <strong>{{ note.title }}</strong>? This action cannot be undone.
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="submit-btn-danger">Delete</button>
+            </form>
+            <div class="auth-link">
+                <a href="{% url 'note_detail' note.pk %}">Cancel</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
