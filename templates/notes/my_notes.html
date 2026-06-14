@@ -2,9 +2,7 @@
 {% block title %}My Notes{% endblock title %}
 {% block nav_notes %}active{% endblock nav_notes %}
 {% block content %}
-    <div class="topbar">
-        <input type="text" placeholder="Search notes...">
-    </div>
+    {% include "notes/partials/search.html" %}
     <h1>My notes</h1>
     <p class="page-subtitle">{{ notes.count }} notes</p>
     {% include "notes/partials/filters.html" %}

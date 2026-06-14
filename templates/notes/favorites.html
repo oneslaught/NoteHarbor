@@ -2,12 +2,10 @@
 {% block title %}Favorites — NoteHarbor{% endblock title %}
 {% block nav_favorites %}active{% endblock nav_favorites %}
 {% block content %}
-    <div class="topbar">
-        <input type="text" placeholder="Search notes...">
-    </div>
+    {% include "notes/partials/search.html" %}
     <h1>Favorite notes</h1>
     <p class="page-subtitle">{{ total_notes }} saved notes across {{ total_courses }} courses</p>
-    {% include "notes/partials/filters.html" %}
+    {% include "notes/partials/filters_full.html" %}
     <div class="notes-grid">
         {% for note in notes %}
             <a href="{% url 'note_detail' note.pk %}" class="note-card">

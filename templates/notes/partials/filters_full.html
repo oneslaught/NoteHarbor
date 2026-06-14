@@ -1,0 +1,23 @@
+<div class="filters">
+   <div class="filter-group">
+      <span class="filter-label">Type:</span>
+      <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}type="
+         class="filter-pill {% if not request.GET.type %}active{% endif %}">All</a>
+      <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}type=notes"
+         class="filter-pill {% if request.GET.type == 'notes' %}active{% endif %}">Notes</a>
+      <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}type=forks"
+         class="filter-pill {% if request.GET.type == 'forks' %}active{% endif %}">Forks</a>
+   </div>
+   <div class="filter-group">
+      <span class="filter-label">Course:</span>
+      <a href="?{% if request.GET.type %}type={{ request.GET.type }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}"
+         class="filter-pill {% if not current_course %}active{% endif %}">All</a>
+      {% for course in courses %}
+         <a href="?{% if request.GET.type %}type={{ request.GET.type }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}course={{ course.id }}"
+            class="filter-pill {% if current_course == course.id|stringformat:'s' %}active{% endif %}">
+            {{ course.name }}
+         </a>
+      {% endfor %}
+   </div>
+   {% include "notes/partials/tag_filter.html" %}
+</div>

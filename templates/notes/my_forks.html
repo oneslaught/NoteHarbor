@@ -2,9 +2,7 @@
 {% block title %}My Forks — NoteHarbor{% endblock title %}
 {% block nav_forks %}active{% endblock nav_forks %}
 {% block content %}
-    <div class="topbar">
-        <input type="text" placeholder="Search notes...">
-    </div>
+    {% include "notes/partials/search.html" %}
     <h1>My forks</h1>
     <p class="page-subtitle">{{ notes.count }} forked notes</p>
     {% include "notes/partials/filters.html" %}

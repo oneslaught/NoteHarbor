@@ -1,22 +1,14 @@
 <div class="filters">
     <div class="filter-group">
         <span class="filter-label">Course:</span>
-        <a href="?"
+        <a href="?{% if request.GET.search %}search={{ request.GET.search }}{% endif %}"
            class="filter-pill {% if not current_course %}active{% endif %}">All</a>
         {% for course in courses %}
-            <a href="?course={{ course.id }}{% if current_tag %}&tag={{ current_tag }}{% endif %}"
+            <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}course={{ course.id }}"
                class="filter-pill {% if current_course == course.id|stringformat:'s' %}active{% endif %}">
                 {{ course.name }}
             </a>
         {% endfor %}
     </div>
-    <div class="filter-group">
-        <span class="filter-label">Tag:</span>
-        <a href="?{% if current_course %}course={{ current_course }}{% endif %}"
-           class="filter-pill {% if not current_tag %}active{% endif %}">All</a>
-        {% for tag in tags %}
-            <a href="?{% if current_course %}course={{ current_course }}&{% endif %}tag={{ tag.id }}"
-               class="filter-pill {% if current_tag == tag.id|stringformat:'s' %}active{% endif %}">{{ tag.name }}</a>
-        {% endfor %}
-    </div>
+    {% include "notes/partials/tag_filter.html" %}
 </div>

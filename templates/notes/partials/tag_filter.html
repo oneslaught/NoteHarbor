@@ -1,0 +1,52 @@
+{# djlint:off H021 #}
+<div class="filter-group" x-data="{
+    open: false,
+    search: '',
+    selected: {{ selected_tags_json }},
+    tags: {{ tags_json }},
+    get filtered() {
+        return this.tags.filter(t => t.name.toLowerCase().includes(this.search.toLowerCase()) && !this.selected.find(s => s.id === t.id))
+    },
+    toggle(tag) {
+        this.selected.push(tag);
+        this.search = '';
+        this.open = false;
+        this.apply();
+    },
+    remove(tag) {
+        this.selected = this.selected.filter(s => s.id !== tag.id);
+        this.apply();
+    },
+    apply() {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('tag');
+        this.selected.forEach(t => url.searchParams.append('tag', t.id));
+        window.location.href = url.toString();
+    }
+}">
+    <span class="filter-label">Tags:</span>
+    <div style="position:relative;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;background-color:#1a1d27;border:1px solid #2a2d3e;border-radius:20px;padding:4px 12px;min-width:200px;cursor:text;">
+            <template x-for="tag in selected" :key="tag.id">
+                <span style="display:flex;align-items:center;gap:4px;padding:3px 10px;background-color:#1d60d3;border:1px solid #477edd;border-radius:20px;font-size:13px;color:#fff;">
+                    <span x-text="tag.name"></span>
+                    <button @click.prevent="remove(tag)" style="background:none;border:none;color:#fff;cursor:pointer;font-size:14px;padding:0 2px;line-height:1;">×</button>
+                </span>
+            </template>
+            <input
+                type="text"
+                placeholder="Search tags..."
+                x-model="search"
+                @focus="open = true"
+                @click.outside="open = false"
+                style="background:transparent;border:none;outline:none;color:#fff;font-size:13px;min-width:120px;padding:0;"
+            >
+        </div>
+        <div style="position:absolute;top:100%;left:0;background-color:#1a1d27;border:1px solid #2a2d3e;border-radius:8px;margin-top:4px;z-index:100;min-width:200px;max-height:200px;overflow-y:auto;" x-show="open && filtered.length > 0">
+            <template x-for="tag in filtered" :key="tag.id">
+                <div @click="toggle(tag)" x-text="tag.name" style="padding:8px 12px;font-size:13px;color:#9aa0b4;cursor:pointer;" @mouseenter="$el.style.backgroundColor='#23263a';$el.style.color='#fff'" @mouseleave="$el.style.backgroundColor='';$el.style.color='#9aa0b4'"></div>
+            </template>
+        </div>
+    </div>
+</div>
+{# djlint:on H021 #}

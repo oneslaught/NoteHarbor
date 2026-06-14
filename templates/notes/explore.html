@@ -2,11 +2,9 @@
 {% block nav_explore %}active{% endblock nav_explore %}
 {% block title %}Explore{% endblock title %}
 {% block content %}
-    <div class="topbar">
-        <input type="text" placeholder="Search notes...">
-    </div>
+    {% include "notes/partials/search.html" %}
     <h1>Recent notes</h1>
-    {% include "notes/partials/filters.html" %}
+    {% include "notes/partials/filters_full.html" %}
     <div class="notes-grid">
         {% for note in notes %}
             <a href="{% url 'note_detail' note.pk %}" class="note-card">

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Note, SavedNote
-from .filters import filter_notes, get_filter_context
+from .filters import filter_notes, get_filter_context, get_selected_tags_json, get_tags_json
 
 
 def home_view(request):
@@ -12,6 +12,8 @@ def home_view(request):
         'notes': notes,
         'courses': courses,
         'tags': tags,
+        'tags_json': get_tags_json(tags),
+        'selected_tags_json': get_selected_tags_json(request, tags),
         'current_course': request.GET.get('course'),
         'current_tag': request.GET.get('tag'),
     })
@@ -58,6 +60,8 @@ def favorites_view(request):
         'notes': notes,
         'courses': courses,
         'tags': tags,
+        'tags_json': get_tags_json(tags),
+        'selected_tags_json': get_selected_tags_json(request, tags),
         'total_notes': total_notes,
         'total_courses': total_courses,
         'current_course': request.GET.get('course'),
@@ -72,6 +76,8 @@ def explore_view(request):
         'notes': notes,
         'courses': courses,
         'tags': tags,
+        'tags_json': get_tags_json(tags),
+        'selected_tags_json': get_selected_tags_json(request, tags),
         'current_course': request.GET.get('course'),
         'current_tag': request.GET.get('tag'),
     })
@@ -107,6 +113,8 @@ def my_forks_view(request):
         'notes': notes_filtered,
         'courses': courses,
         'tags': tags,
+        'tags_json': get_tags_json(tags),
+        'selected_tags_json': get_selected_tags_json(request, tags),
         'current_course': request.GET.get('course'),
         'current_tag': request.GET.get('tag'),
     })
@@ -120,6 +128,8 @@ def my_notes_view(request):
         'notes': notes_filtered,
         'courses': courses,
         'tags': tags,
+        'tags_json': get_tags_json(tags),
+        'selected_tags_json': get_selected_tags_json(request, tags),
         'current_course': request.GET.get('course'),
         'current_tag': request.GET.get('tag'),
     })
