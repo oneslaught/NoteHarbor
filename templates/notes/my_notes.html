@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% block title %}My Notes{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans "My Notes" %}{% endblock title %}
 {% block nav_notes %}active{% endblock nav_notes %}
 {% block content %}
     {% include "notes/partials/search.html" %}
-    <h1>My notes</h1>
-    <p class="page-subtitle">{{ notes.count }} notes</p>
+    <h1>{% trans "My notes" %}</h1>
+    <p class="page-subtitle">{{ notes.count }} {% trans "notes" %}</p>
     {% include "notes/partials/filters.html" %}
     <div class="notes-grid">
         {% for note in notes %}
@@ -13,7 +14,7 @@
                     <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
                 </div>
                 <div class="note-title">{{ note.title }}</div>
-                <div class="note-meta">by {{ note.author.username }} · {{ note.created_at|timesince }} ago</div>
+                <div class="note-meta">{% trans "by" %} {{ note.author.username }} · {{ note.created_at|timesince }} {% trans "ago" %}</div>
                 <div class="note-stats">
                     <span class="stat">
                         <span class="dot dot-green"></span>
@@ -22,13 +23,13 @@
                     {% if not note.is_fork %}
                         <span class="stat">
                             <span class="dot dot-blue"></span>
-                            {{ note.fork_count }} forks
+                            {{ note.fork_count }} {% trans "forks" %}
                         </span>
                     {% endif %}
                 </div>
             </a>
         {% empty %}
-            <p>No notes yet.</p>
+            <p>{% trans "No notes yet." %}</p>
         {% endfor %}
     </div>
 {% endblock content %}

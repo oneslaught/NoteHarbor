@@ -1,0 +1,382 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-14 21:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: notes/forms.py:8
+msgid "Add tags separated by commas: python, integrals, totalitarism..."
+msgstr "Додайте теги, розділивши їх комами: python, інтеграли, тоталітаризм..."
+
+#: notes/forms.py:9 templates/notes/note_detail.html:80
+#: templates/notes/partials/tag_filter.html:28
+msgid "Tags"
+msgstr "Теги"
+
+#: notes/forms.py:16
+msgid "Note title..."
+msgstr "Назва нотатку"
+
+#: notes/forms.py:17
+msgid "Write your note here..."
+msgstr "Пишіть свою нотатку тут..."
+
+#: notes/forms.py:20
+msgid "Title"
+msgstr "Назва"
+
+#: notes/forms.py:21 templates/notes/partials/filters.html:4
+#: templates/notes/partials/filters_full.html:13
+msgid "Course"
+msgstr "Курс"
+
+#: notes/forms.py:22
+msgid "Content"
+msgstr "Зміст"
+
+#: templates/base.html:27 templates/notes/home.html:3
+msgid "Home"
+msgstr "Головна"
+
+#: templates/base.html:29 templates/notes/explore.html:4
+#, fuzzy
+#| msgid "Explore notes"
+msgid "Explore"
+msgstr "Оглянути нотатки"
+
+#: templates/base.html:31 templates/notes/favorites.html:3
+#, fuzzy
+#| msgid "Favorite notes"
+msgid "Favorites"
+msgstr "Обрані Нотатки"
+
+#: templates/base.html:33 templates/notes/my_forks.html:7
+msgid "My forks"
+msgstr "Мої Форки"
+
+#: templates/base.html:35 templates/notes/my_notes.html:7
+msgid "My notes"
+msgstr "Мої нотатки"
+
+#: templates/base.html:40
+msgid "Log out"
+msgstr "Вийти"
+
+#: templates/base.html:42 templates/users/login.html:22
+#: templates/users/register.html:25
+msgid "Log in"
+msgstr "Увійти"
+
+#: templates/base.html:43 templates/users/login.html:25
+#: templates/users/register.html:3 templates/users/register.html:22
+msgid "Register"
+msgstr "Зареєструватися"
+
+#: templates/base.html:49
+msgid "Language"
+msgstr "Мова"
+
+#: templates/notes/create_note.html:3 templates/notes/create_note.html:8
+msgid "Create note"
+msgstr "Створити нотатку"
+
+#: templates/notes/create_note.html:7 templates/notes/edit_note.html:9
+#: templates/notes/note_detail.html:10
+msgid "Back"
+msgstr "Назад"
+
+#: templates/notes/create_note.html:24
+msgid "Publish note"
+msgstr "Створити нотатку"
+
+#: templates/notes/delete_note.html:3 templates/notes/delete_note.html:7
+#: templates/notes/note_detail.html:98
+msgid "Delete note"
+msgstr "Видалити нотатку"
+
+#: templates/notes/delete_note.html:9
+msgid "Are you sure you want to delete"
+msgstr "Ви впевнені, що хочете видалити"
+
+#: templates/notes/delete_note.html:9
+msgid "This action cannot be undone."
+msgstr "Цю дію неможливо відмінити."
+
+#: templates/notes/delete_note.html:13
+msgid "Delete"
+msgstr "Видалити"
+
+#: templates/notes/delete_note.html:16
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: templates/notes/edit_note.html:3 templates/notes/edit_note.html:10
+#: templates/notes/note_detail.html:96
+msgid "Edit note"
+msgstr "Редагувати нотатку"
+
+#: templates/notes/edit_note.html:26
+msgid "Save changes"
+msgstr "Зберегти зміни"
+
+#: templates/notes/explore.html:7
+msgid "Recent notes"
+msgstr "Останні нотатки"
+
+#: templates/notes/explore.html:16 templates/notes/favorites.html:17
+#: templates/notes/home.html:42 templates/notes/home.html:65
+#: templates/notes/my_forks.html:17 templates/notes/my_notes.html:17
+#: templates/notes/note_detail.html:22
+msgid "by"
+msgstr "від"
+
+#: templates/notes/explore.html:16 templates/notes/favorites.html:17
+#: templates/notes/home.html:42 templates/notes/home.html:65
+#: templates/notes/my_forks.html:17 templates/notes/my_notes.html:17
+#: templates/notes/note_detail.html:22
+msgid "ago"
+msgstr "тому"
+
+#: templates/notes/explore.html:25 templates/notes/favorites.html:26
+#: templates/notes/home.html:45 templates/notes/home.html:74
+#: templates/notes/my_forks.html:26 templates/notes/my_notes.html:26
+#: templates/notes/note_detail.html:33
+msgid "forks"
+msgstr "форків"
+
+#: templates/notes/explore.html:31 templates/notes/my_notes.html:32
+msgid "No notes yet."
+msgstr "Поки що жодної нотатки"
+
+#: templates/notes/favorites.html:7
+msgid "Favorite notes"
+msgstr "Обрані Нотатки"
+
+#: templates/notes/favorites.html:8
+msgid "saved notes across"
+msgstr "збережені нотатки з"
+
+#: templates/notes/favorites.html:8
+msgid "courses"
+msgstr "курсів"
+
+#: templates/notes/favorites.html:32
+msgid "No saved notes yet."
+msgstr "Поки що жодної збереженної нотатки"
+
+#: templates/notes/home.html:10 templates/users/login.html:7
+msgid "Welcome back"
+msgstr "З поверненням"
+
+#: templates/notes/home.html:11
+msgid "Here's what's happening with your notes"
+msgstr "Ось інформація по вашим нотаткам"
+
+#: templates/notes/home.html:13
+msgid "Create new note"
+msgstr "Створити нову нотатку"
+
+#: templates/notes/home.html:19
+msgid "Notes created"
+msgstr "Створено нотатків"
+
+#: templates/notes/home.html:23
+msgid "Notes saved"
+msgstr "Збережено нотатків"
+
+#: templates/notes/home.html:27
+msgid "Forks made"
+msgstr "Зроблено форків"
+
+#: templates/notes/home.html:32
+msgid "Recently saved"
+msgstr "Нещодавно збережено"
+
+#: templates/notes/home.html:33 templates/notes/home.html:56
+msgid "View all"
+msgstr "Усі нотатки"
+
+#: templates/notes/home.html:49
+msgid "No saved notes yet. Click here to explore notes"
+msgstr ""
+"Немає жодної збереженної нотатки. Натисніть сюди щоб переглянути існуючі "
+"нотатки"
+
+#: templates/notes/home.html:55
+msgid "Your recent notes"
+msgstr "Ваші нещодавні нотатки"
+
+#: templates/notes/home.html:81
+msgid "No notes yet. Create your first note"
+msgstr "Немає жодної нотатки. Натисніть сюди щоб створити першу нотатку"
+
+#: templates/notes/home.html:88
+msgid "Welcome to"
+msgstr "Ласкаво просимо до"
+
+#: templates/notes/home.html:89
+msgid "A place to create, share and discover notes with other students"
+msgstr ""
+"Місце, де можна створювати, ділитися та знаходити нотатки разом з іншими "
+"студентами"
+
+#: templates/notes/home.html:91
+msgid "Get started"
+msgstr "Почати"
+
+#: templates/notes/home.html:92
+msgid "Explore notes"
+msgstr "Оглянути нотатки"
+
+#: templates/notes/my_forks.html:3
+#, fuzzy
+#| msgid "My forks"
+msgid "My Forks"
+msgstr "Мої Форки"
+
+#: templates/notes/my_forks.html:8
+msgid "forked notes"
+msgstr "форкнуті нотатки"
+
+#: templates/notes/my_forks.html:32
+#, fuzzy
+#| msgid "No saved notes yet."
+msgid "No forked notes yet."
+msgstr "Поки що жодної збереженної нотатки"
+
+#: templates/notes/my_notes.html:3
+#, fuzzy
+#| msgid "My notes"
+msgid "My Notes"
+msgstr "Мої нотатки"
+
+#: templates/notes/my_notes.html:8
+#, fuzzy
+#| msgid "My notes"
+msgid "notes"
+msgstr "Мої нотатки"
+
+#: templates/notes/note_detail.html:15
+msgid "forked from"
+msgstr "форк з"
+
+#: templates/notes/note_detail.html:41
+msgid "Actions"
+msgstr "Дії"
+
+#: templates/notes/note_detail.html:47
+msgid "Remove from favorites"
+msgstr "Видалити з обраних"
+
+#: templates/notes/note_detail.html:49
+msgid "Save to favorites"
+msgstr "Додати до обраних"
+
+#: templates/notes/note_detail.html:55
+msgid "Rate this note"
+msgstr "Оціни цю нотатку"
+
+#: templates/notes/note_detail.html:74
+msgid "Fork this note"
+msgstr "Зроби форк цієї нотатки"
+
+#: templates/notes/note_detail.html:85
+msgid "No tags"
+msgstr "Немає тегів"
+
+#: templates/notes/note_detail.html:90
+msgid "Created"
+msgstr "Створенно"
+
+#: templates/notes/note_detail.html:95
+msgid "Danger zone"
+msgstr "Зона ризику"
+
+#: templates/notes/partials/filters.html:6
+#: templates/notes/partials/filters_full.html:6
+#: templates/notes/partials/filters_full.html:15
+msgid "All"
+msgstr "Усі"
+
+#: templates/notes/partials/filters_full.html:4
+msgid "Type"
+msgstr "Тип"
+
+#: templates/notes/partials/filters_full.html:8
+msgid "Notes"
+msgstr "Нотатки"
+
+#: templates/notes/partials/filters_full.html:10
+msgid "Forks"
+msgstr "Форки"
+
+#: templates/notes/partials/search.html:4
+#, fuzzy
+#| msgid "Search tags..."
+msgid "Search by note name..."
+msgstr "Шукати нотатку за ім'ям..."
+
+#: templates/notes/partials/sort.html:3
+msgid "Sort"
+msgstr "Сортувати"
+
+#: templates/notes/partials/sort.html:5
+msgid "Newest"
+msgstr "Найновіші"
+
+#: templates/notes/partials/sort.html:7
+msgid "Oldest"
+msgstr "Найдавніші"
+
+#: templates/notes/partials/sort.html:9
+msgid "Highest rated"
+msgstr "Найліпші за рейтингом"
+
+#: templates/notes/partials/sort.html:11
+msgid "Lowest rated"
+msgstr "Найгірші за рейтингом"
+
+#: templates/notes/partials/sort.html:14
+msgid "Most forked"
+msgstr "Більш форків"
+
+#: templates/notes/partials/tag_filter.html:39
+msgid "Search tags..."
+msgstr "Шукати по тегам..."
+
+#: templates/users/login.html:3
+msgid "Login"
+msgstr "Увійти"
+
+#: templates/users/login.html:20
+msgid "Invalid username or password."
+msgstr "Неправильне ім'я чи пароль"
+
+#: templates/users/login.html:25
+msgid "Don't have an account?"
+msgstr "Немає аккаута?"
+
+#: templates/users/register.html:7
+msgid "Create account"
+msgstr "Створити акаунт"
+
+#: templates/users/register.html:25
+msgid "Already have an account?"
+msgstr "Вже є акаунт?"

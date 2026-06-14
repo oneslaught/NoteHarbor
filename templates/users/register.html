@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Register{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans "Register" %}{% endblock title %}
 {% block content %}
     <div class="auth-page">
         <div class="auth-card">
-            <h1>Create account</h1>
+            <h1>{% trans "Create account" %}</h1>
             <form method="post">
                 {% csrf_token %}
                 {% for field in form %}
@@ -18,10 +19,10 @@
                         {% endfor %}
                     </div>
                 {% endfor %}
-                <button type="submit" class="submit-btn">Register</button>
+                <button type="submit" class="submit-btn">{% trans "Register" %}</button>
             </form>
             <div class="auth-link">
-                Already have an account? <a href="{% url 'login' %}">Log in</a>
+                {% trans "Already have an account?" %} <a href="{% url 'login' %}">{% trans "Log in" %}</a>
             </div>
         </div>
     </div>

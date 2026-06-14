@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Login{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans "Login" %}{% endblock title %}
 {% block content %}
     <div class="auth-page">
         <div class="auth-card">
-            <h1>Welcome back</h1>
+            <h1>{% trans "Welcome back" %}</h1>
             <form method="post">
                 {% csrf_token %}
                 {% for field in form %}
@@ -16,12 +17,12 @@
                     </div>
                 {% endfor %}
                 {% if form.non_field_errors %}
-                    <div class="error">Invalid username or password.</div>
+                    <div class="error">{% trans "Invalid username or password." %}</div>
                 {% endif %}
-                <button type="submit" class="submit-btn">Log in</button>
+                <button type="submit" class="submit-btn">{% trans "Log in" %}</button>
             </form>
             <div class="auth-link">
-                Don't have an account? <a href="{% url 'register' %}">Register</a>
+                {% trans "Don't have an account?" %} <a href="{% url 'register' %}">{% trans "Register" %}</a>
             </div>
         </div>
     </div>

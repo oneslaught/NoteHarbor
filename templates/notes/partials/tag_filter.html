@@ -1,3 +1,4 @@
+{% load i18n %}
 {# djlint:off H021 #}
 <div class="filter-group" x-data="{
     open: false,
@@ -23,8 +24,8 @@
         this.selected.forEach(t => url.searchParams.append('tag', t.id));
         window.location.href = url.toString();
     }
-}">
-    <span class="filter-label">Tags:</span>
+">
+    <span class="filter-label">{% trans "Tags" %}:</span>
     <div style="position:relative;">
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;background-color:#1a1d27;border:1px solid #2a2d3e;border-radius:20px;padding:4px 12px;min-width:200px;min-height:32px;cursor:text;">
             <template x-for="tag in selected" :key="tag.id">
@@ -35,7 +36,7 @@
             </template>
             <input
                 type="text"
-                placeholder="Search tags..."
+                placeholder="{% trans "Search tags..." %}"
                 x-model="search"
                 @focus="open = true"
                 @click.outside="open = false"

@@ -1,12 +1,13 @@
 {% extends "base.html" %}
-{% block title %}Edit note{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans "Edit note" %}{% endblock title %}
 {% block content %}
     <div class="create-note-page">
         <div class="create-note-header">
             <a href="{{ request.META.HTTP_REFERER|default:'/' }}"
                class="back-link"
-               onclick="event.preventDefault(); history.back();">⬅ Back</a>
-            <h1>Edit note</h1>
+               onclick="event.preventDefault(); history.back();">⬅ {% trans "Back" %}</a>
+            <h1>{% trans "Edit note" %}</h1>
         </div>
         <form method="post" class="create-note-form">
             {% csrf_token %}
@@ -22,7 +23,7 @@
                     {% endfor %}
                 </div>
             {% endfor %}
-            <button type="submit" class="submit-btn">Save changes</button>
+            <button type="submit" class="submit-btn">{% trans "Save changes" %}</button>
         </form>
     </div>
 {% endblock content %}

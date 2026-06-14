@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,7 +8,8 @@
               content="{% block meta_description %}NoteHarbor is a student note-taking platform for organizing ideas and sharing notes{% endblock meta_description %}">
         <meta name="keywords"
               content="{% block meta_keywords %}notes, collaboration, productivity, organization, study{% endblock meta_keywords %}">
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script defer
+                src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <title>{% block title %}NoteHarbor{% endblock title %}</title>
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
@@ -23,24 +24,42 @@
         <div class="sidebar">
             <div class="logo"><a href="{% url 'home' %}">Note<span>Harbor</span></a></div>
             <a href="{% url 'home' %}"
-               class="nav-item {% block nav_home %}{% endblock nav_home %}">Home</a>
+               class="nav-item {% block nav_home %}{% endblock nav_home %}">{% trans "Home" %}</a>
             <a href="{% url 'explore' %}"
-               class="nav-item {% block nav_explore %}{% endblock nav_explore %}">Explore</a>
+               class="nav-item {% block nav_explore %}{% endblock nav_explore %}">{% trans "Explore" %}</a>
             <a href="{% url 'favorites' %}"
-               class="nav-item {% block nav_favorites %}{% endblock nav_favorites %}">Favorites</a>
+               class="nav-item {% block nav_favorites %}{% endblock nav_favorites %}">{% trans "Favorites" %}</a>
             <a href="{% url 'my_forks' %}"
-               class="nav-item {% block nav_forks %}{% endblock nav_forks %}">My forks</a>
+               class="nav-item {% block nav_forks %}{% endblock nav_forks %}">{% trans "My forks" %}</a>
             <a href="{% url 'my_notes' %}"
-               class="nav-item {% block nav_notes %}{% endblock nav_notes %}">My notes</a>
+               class="nav-item {% block nav_notes %}{% endblock nav_notes %}">{% trans "My notes" %}</a>
             <div class="user-info">
                 {% if request.user.is_authenticated %}
-                    <div>{{ request.user.username }}</div>
-                    <div>{{ request.user.profile.role|capfirst }}</div>
-                    <a href="{% url 'logout' %}">Log out</a>
+                    <div class="username">{{ request.user.username }}</div>
+                    <div class="role">{{ request.user.profile.role|capfirst }}</div>
+                    <a href="{% url 'logout' %}" class="logout-btn">{% trans "Log out" %}</a>
                 {% else %}
-                    <a href="{% url 'login' %}">Log in</a>
-                    <a href="{% url 'register' %}">Register</a>
+                    <a href="{% url 'login' %}">{% trans "Log in" %}</a>
+                    <a href="{% url 'register' %}">{% trans "Register" %}</a>
                 {% endif %}
+                <form action="{% url 'set_language' %}" method="post" class="lang-switcher">
+                    {% csrf_token %}
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    <span class="lang-label">{% trans "Language" %}:</span>
+                    {% for lang_code, lang_name in LANGUAGES %}
+                        <button type="submit"
+                                name="language"
+                                value="{{ lang_code }}"
+                                class="lang-btn {% if lang_code == LANGUAGE_CODE %}active{% endif %}">
+                            {% if lang_code == 'uk' %}
+                                UA
+                            {% else %}
+                                {{ lang_code|upper }}
+                            {% endif %}
+                        </button>
+                    {% endfor %}
+                </form>
             </div>
         </div>
         <div class="main">

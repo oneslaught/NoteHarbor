@@ -1,35 +1,36 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans "Home" %}{% endblock title %}
 {% block nav_home %}active{% endblock nav_home %}
 {% block content %}
     {% if request.user.is_authenticated %}
         <div class="home-header">
             <div class="home-header-top">
                 <div>
-                    <h1>Welcome back, {{ request.user.username }}</h1>
-                    <p class="page-subtitle">Here's what's happening with your notes</p>
+                    <h1>{% trans "Welcome back" %}, {{ request.user.username }}</h1>
+                    <p class="page-subtitle">{% trans "Here's what's happening with your notes" %}</p>
                 </div>
-                <a href="{% url 'create_note' %}" class="hero-btn primary">Create new note</a>
+                <a href="{% url 'create_note' %}" class="hero-btn primary">{% trans "Create new note" %}</a>
             </div>
         </div>
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-value">{{ notes_count }}</div>
-                <div class="stat-label">Notes created</div>
+                <div class="stat-label">{% trans "Notes created" %}</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{{ saved_count }}</div>
-                <div class="stat-label">Notes saved</div>
+                <div class="stat-label">{% trans "Notes saved" %}</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{{ forks_count }}</div>
-                <div class="stat-label">Forks made</div>
+                <div class="stat-label">{% trans "Forks made" %}</div>
             </div>
         </div>
         <div class="home-section">
             <div class="home-section-header">
-                <h2>Recently saved</h2>
-                <a href="{% url 'favorites' %}">View all ➡</a>
+                <h2>{% trans "Recently saved" %}</h2>
+                <a href="{% url 'favorites' %}">{% trans "View all" %} ➡</a>
             </div>
             <div class="notes-grid">
                 {% for note in recent_saved %}
@@ -38,21 +39,21 @@
                             <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
                         </div>
                         <div class="note-title">{{ note.title }}</div>
-                        <div class="note-meta">by {{ note.author.username }} · {{ note.created_at|timesince }} ago</div>
+                        <div class="note-meta">{% trans "by" %} {{ note.author.username }} · {{ note.created_at|timesince }} {% trans "ago" %}</div>
                         <div class="note-stats">
                             <span class="stat"><span class="dot dot-green"></span>{{ note.average_rating|default:"—" }}</span>
-                            <span class="stat"><span class="dot dot-blue"></span>{{ note.fork_count }} forks</span>
+                            <span class="stat"><span class="dot dot-blue"></span>{{ note.fork_count }} {% trans "forks" %}</span>
                         </div>
                     </a>
                 {% empty %}
-                    <p class="page-subtitle"><a href="{% url 'explore' %}">No saved notes yet. Click here to explore notes</a></p>
+                    <p class="page-subtitle"><a href="{% url 'explore' %}">{% trans "No saved notes yet. Click here to explore notes" %}</a></p>
                 {% endfor %}
             </div>
         </div>
         <div class="home-section">
             <div class="home-section-header">
-                <h2>Your recent notes</h2>
-                <a href="{% url 'my_notes' %}">View all ➡</a>
+                <h2>{% trans "Your recent notes" %}</h2>
+                <a href="{% url 'my_notes' %}">{% trans "View all" %} ➡</a>
             </div>
             <div class="notes-grid">
                 {% for note in recent_notes %}
@@ -61,7 +62,7 @@
                             <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
                         </div>
                         <div class="note-title">{{ note.title }}</div>
-                        <div class="note-meta">by {{ note.author.username }} · {{ note.created_at|timesince }} ago</div>
+                        <div class="note-meta">{% trans "by" %} {{ note.author.username }} · {{ note.created_at|timesince }} {% trans "ago" %}</div>
                         <div class="note-stats">
                             <span class="stat">
                                 <span class="dot dot-green"></span>
@@ -70,25 +71,25 @@
                             {% if not note.is_fork %}
                                 <span class="stat">
                                     <span class="dot dot-blue"></span>
-                                    {{ note.fork_count }} forks
+                                    {{ note.fork_count }} {% trans "forks" %}
                                 </span>
                             {% endif %}
                         </div>
                     </a>
                 {% empty %}
                     <p class="page-subtitle">
-                        <a href="{% url 'create_note' %}">No notes yet. Create your first note</a>
+                        <a href="{% url 'create_note' %}">{% trans "No notes yet. Create your first note" %}</a>
                     </p>
                 {% endfor %}
             </div>
         </div>
     {% else %}
         <div class="home-hero">
-            <h1>Welcome to Note<span class="text-blue">Harbor</span></h1>
-            <p>A place to create, share and discover notes with other students</p>
+            <h1>{% trans "Welcome to" %} Note<span class="text-blue">Harbor</span></h1>
+            <p>{% trans "A place to create, share and discover notes with other students" %}</p>
             <div class="hero-actions">
-                <a href="{% url 'register' %}" class="hero-btn primary">Get started</a>
-                <a href="{% url 'explore' %}" class="hero-btn">Explore notes</a>
+                <a href="{% url 'register' %}" class="hero-btn primary">{% trans "Get started" %}</a>
+                <a href="{% url 'explore' %}" class="hero-btn">{% trans "Explore notes" %}</a>
             </div>
         </div>
     {% endif %}

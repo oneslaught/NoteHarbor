@@ -1,15 +1,16 @@
+{% load i18n %}
 <div class="filter-group">
-    <span class="filter-label">Sort:</span>
+    <span class="filter-label">{% trans "Sort" %}:</span>
     <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.tag %}tag={{ request.GET.tag }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=newest"
-       class="filter-pill {% if current_sort == 'newest' or not current_sort %}active{% endif %}">Newest</a>
+       class="filter-pill {% if current_sort == 'newest' or not current_sort %}active{% endif %}">{% trans "Newest" %}</a>
     <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.tag %}tag={{ request.GET.tag }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=oldest"
-       class="filter-pill {% if current_sort == 'oldest' %}active{% endif %}">Oldest</a>
+       class="filter-pill {% if current_sort == 'oldest' %}active{% endif %}">{% trans "Oldest" %}</a>
     <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.tag %}tag={{ request.GET.tag }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=highest_rated"
-       class="filter-pill {% if current_sort == 'highest_rated' %}active{% endif %}">Highest rated</a>
+       class="filter-pill {% if current_sort == 'highest_rated' %}active{% endif %}">{% trans "Highest rated" %}</a>
     <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.tag %}tag={{ request.GET.tag }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=lowest_rated"
-       class="filter-pill {% if current_sort == 'lowest_rated' %}active{% endif %}">Lowest rated</a>
+       class="filter-pill {% if current_sort == 'lowest_rated' %}active{% endif %}">{% trans "Lowest rated" %}</a>
     {% if show_forks_sort %}
-        <a href="?...sort=most_forked"
-           class="filter-pill {% if current_sort == 'most_forked' %}active{% endif %}">Most forked</a>
+        <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.tag %}tag={{ request.GET.tag }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}sort=most_forked"
+           class="filter-pill {% if current_sort == 'most_forked' %}active{% endif %}">{% trans "Most forked" %}</a>
     {% endif %}
 </div>

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}
     {{ note.title }}
 {% endblock title %}
@@ -6,19 +7,19 @@
     <div class="note-detail">
         <a href="{{ request.META.HTTP_REFERER|default:'/' }}"
            class="back-link"
-           onclick="event.preventDefault(); history.back();">⬅ Back</a>
+           onclick="event.preventDefault(); history.back();">⬅ {% trans "Back" %}</a>
         <div class="note-body">
             <div class="note-body-header">
                 <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
                 {% if note.is_fork %}
-                    <span class="fork-info">forked from
+                    <span class="fork-info">{% trans "forked from" %}
                         <a href="{% url 'note_detail' note.original_note.pk %}">{{ note.original_note.title }}</a>
                     </span>
                 {% endif %}
             </div>
             <h1>{{ note.title }}</h1>
             <p class="note-author">
-                by <span>{{ note.author.username }}</span> · {{ note.created_at|timesince }} ago
+                {% trans "by" %} <span>{{ note.author.username }}</span> · {{ note.created_at|timesince }} {% trans "ago" %}
             </p>
             <div class="note-content">{{ note.content|linebreaks }}</div>
             <div class="note-footer">
@@ -29,7 +30,7 @@
                 {% if not note.is_fork %}
                     <span class="forks">
                         <span class="dot dot-blue"></span>
-                        {{ note.fork_count }} forks
+                        {{ note.fork_count }} {% trans "forks" %}
                     </span>
                 {% endif %}
             </div>
@@ -37,21 +38,21 @@
         <div class="note-sidebar">
             {% if request.user.is_authenticated %}
                 <div class="sidebar-card">
-                    <h3>Actions</h3>
+                    <h3>{% trans "Actions" %}</h3>
                     <form method="post" action="{% url 'toggle_favorite' note.pk %}">
                         {% csrf_token %}
                         <button type="submit"
                                 class="action-btn {% if is_saved %}remove{% else %}primary{% endif %}">
                             {% if is_saved %}
-                                Remove from favorites
+                                {% trans "Remove from favorites" %}
                             {% else %}
-                                Save to favorites
+                                {% trans "Save to favorites" %}
                             {% endif %}
                         </button>
                     </form>
                     {% if request.user.is_authenticated and request.user != note.author %}
                         <div class="sidebar-card">
-                            <h3>Rate this note</h3>
+                            <h3>{% trans "Rate this note" %}</h3>
                             <form method="post"
                                   action="{% url 'rate_note' note.pk %}"
                                   class="rating-form">
@@ -70,31 +71,31 @@
                     {% if can_fork %}
                         <form method="post" action="{% url 'fork_note' note.pk %}">
                             {% csrf_token %}
-                            <button type="submit" class="action-btn">Fork this note</button>
+                            <button type="submit" class="action-btn">{% trans "Fork this note" %}</button>
                         </form>
                     {% endif %}
                 </div>
             {% endif %}
             <div class="sidebar-card">
-                <h3>Tags</h3>
+                <h3>{% trans "Tags" %}</h3>
                 <div class="tags-list">
                     {% for tag in note.tags.all %}
                         <span class="tag">{{ tag.name }}</span>
                     {% empty %}
-                        <span class="tag">No tags</span>
+                        <span class="tag">{% trans "No tags" %}</span>
                     {% endfor %}
                 </div>
             </div>
             <div class="sidebar-card">
-                <h3>Info</h3>
+                <h3>{% trans "Created" %}</h3>
                 <div class="tag">📅 {{ note.created_at|date:"d M Y" }}</div>
             </div>
             {% if request.user == note.author or request.user.profile.is_admin %}
                 <div class="sidebar-card">
-                    <h3>Danger zone</h3>
-                    <a href="{% url 'edit_note' note.pk %}" class="action-btn edit-btn">Edit note</a>
+                    <h3>{% trans "Danger zone" %}</h3>
+                    <a href="{% url 'edit_note' note.pk %}" class="action-btn edit-btn">{% trans "Edit note" %}</a>
                     <a href="{% url 'delete_note' note.pk %}"
-                       class="action-btn btn-danger delete-note">Delete note</a>
+                       class="action-btn btn-danger delete-note">{% trans "Delete note" %}</a>
                 </div>
             {% endif %}
         </div>

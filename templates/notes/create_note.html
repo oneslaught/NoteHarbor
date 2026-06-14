@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Create note{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans "Create note" %}{% endblock title %}
 {% block content %}
     <div class="create-note-page">
         <div class="create-note-header">
-            <a href="{% url 'home' %}" class="back-link">⬅ Back</a>
-            <h1>Create note</h1>
+            <a href="{% url 'home' %}" class="back-link">⬅ {% trans "Back" %}</a>
+            <h1>{% trans "Create note" %}</h1>
         </div>
         <form method="post" class="create-note-form">
             {% csrf_token %}
@@ -20,7 +21,7 @@
                     {% endfor %}
                 </div>
             {% endfor %}
-            <button type="submit" class="submit-btn">Publish note</button>
+            <button type="submit" class="submit-btn">{% trans "Publish note" %}</button>
         </form>
     </div>
 {% endblock content %}
