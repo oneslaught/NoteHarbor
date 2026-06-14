@@ -26,7 +26,7 @@
 }">
     <span class="filter-label">Tags:</span>
     <div style="position:relative;">
-        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;background-color:#1a1d27;border:1px solid #2a2d3e;border-radius:20px;padding:4px 12px;min-width:200px;cursor:text;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;background-color:#1a1d27;border:1px solid #2a2d3e;border-radius:20px;padding:4px 12px;min-width:200px;min-height:32px;cursor:text;">
             <template x-for="tag in selected" :key="tag.id">
                 <span style="display:flex;align-items:center;gap:4px;padding:3px 10px;background-color:#1d60d3;border:1px solid #477edd;border-radius:20px;font-size:13px;color:#fff;">
                     <span x-text="tag.name"></span>
@@ -39,7 +39,7 @@
                 x-model="search"
                 @focus="open = true"
                 @click.outside="open = false"
-                style="background:transparent;border:none;outline:none;color:#fff;font-size:13px;min-width:120px;padding:0;"
+                style="background:transparent;border:none;outline:none;color:#fff;font-size:13px;min-width:120px;padding:0;flex-shrink:0;"
             >
         </div>
         <div style="position:absolute;top:100%;left:0;background-color:#1a1d27;border:1px solid #2a2d3e;border-radius:8px;margin-top:4px;z-index:100;min-width:200px;max-height:200px;overflow-y:auto;" x-show="open && filtered.length > 0">
