@@ -1,3 +1,5 @@
+from click import option
+
 from .models import Course, Tag
 
 def filter_notes(notes, request):
@@ -37,3 +39,20 @@ def get_selected_tags_json(request, tags):
     tag_ids = request.GET.getlist('tag')
     selected = [{'id': t.id, 'name': t.name} for t in tags if str(t.id) in tag_ids]
     return json.dumps(selected)
+
+def sort_notes(notes, request):
+    sort = request.GET.get('sort', 'newest')
+    if sort == 'oldest':
+        notes = notes.order_by('created_at')
+    elif sort == 'most_forked':
+        from django.db.models import Count
+        notes = notes.annotate(forks_count=Count('forks')).order_by('-forks_count')
+    elif sort == 'highest_rated':
+        from django.db.models import Avg
+        notes = notes.annotate(avg_rating=Avg('ratings__score')).order_by('-avg_rating')
+    elif sort == 'lowest_rated':
+        from django.db.models import Avg
+        notes = notes.annotate(avg_rating=Avg('ratings__score')).order_by('avg_rating')
+    else:
+        notes = notes.order_by('-created_at')
+    return notes

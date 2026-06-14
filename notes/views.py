@@ -2,7 +2,7 @@ from multiprocessing import context
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .filters import filter_notes, get_filter_context, get_selected_tags_json, get_tags_json
+from .filters import filter_notes, get_filter_context, get_selected_tags_json, get_tags_json, sort_notes
 from .forms import NoteForm
 from .models import Note, SavedNote, Rating
 
@@ -54,10 +54,11 @@ def toggle_favorite_view(request, pk):
 def favorites_view(request):
     all_saved = SavedNote.objects.filter(user=request.user)
     total_notes = all_saved.count()
-    notes = Note.objects.filter(saved_by__user=request.user).order_by('-saved_by__saved_at')
+    notes = Note.objects.filter(saved_by__user=request.user)
     courses, tags = get_filter_context(notes)
     total_courses = courses.count()
     notes = filter_notes(notes, request)
+    notes = sort_notes(notes, request)
     return render(request, 'notes/favorites.html', {
         'notes': notes,
         'courses': courses,
@@ -68,12 +69,15 @@ def favorites_view(request):
         'total_courses': total_courses,
         'current_course': request.GET.get('course'),
         'current_tag': request.GET.get('tag'),
+        'current_sort': request.GET.get('sort', 'newest'),
+        'show_forks_sort': True,
     })
     
 def explore_view(request):
-    notes = Note.objects.all().order_by('-created_at')
+    notes = Note.objects.all()
     courses, tags = get_filter_context(notes)
     notes = filter_notes(notes, request)
+    notes = sort_notes(notes, request)
     return render(request, 'notes/explore.html', {
         'notes': notes,
         'courses': courses,
@@ -82,6 +86,8 @@ def explore_view(request):
         'selected_tags_json': get_selected_tags_json(request, tags),
         'current_course': request.GET.get('course'),
         'current_tag': request.GET.get('tag'),
+        'current_sort': request.GET.get('sort', 'newest'),
+        'show_forks_sort': True,
     })
 
 @login_required
@@ -108,9 +114,10 @@ def fork_note_view(request, pk):
 
 @login_required
 def my_forks_view(request):
-    notes = Note.objects.filter(author=request.user, original_note__isnull=False).order_by('-created_at')
+    notes = Note.objects.filter(author=request.user, original_note__isnull=False)
     courses, tags = get_filter_context(notes)
     notes_filtered = filter_notes(notes, request)
+    notes_filtered = sort_notes(notes_filtered, request)
     return render(request, 'notes/my_forks.html', {
         'notes': notes_filtered,
         'courses': courses,
@@ -119,13 +126,16 @@ def my_forks_view(request):
         'selected_tags_json': get_selected_tags_json(request, tags),
         'current_course': request.GET.get('course'),
         'current_tag': request.GET.get('tag'),
+        'current_sort': request.GET.get('sort', 'newest'),
+        'show_forks_sort': False,
     })
     
 @login_required
 def my_notes_view(request):
-    notes = Note.objects.filter(author=request.user, original_note__isnull=True).order_by('-created_at')
+    notes = Note.objects.filter(author=request.user, original_note__isnull=True)
     courses, tags = get_filter_context(notes)
     notes_filtered = filter_notes(notes, request)
+    notes_filtered = sort_notes(notes_filtered, request)
     return render(request, 'notes/my_notes.html', {
         'notes': notes_filtered,
         'courses': courses,
@@ -134,6 +144,8 @@ def my_notes_view(request):
         'selected_tags_json': get_selected_tags_json(request, tags),
         'current_course': request.GET.get('course'),
         'current_tag': request.GET.get('tag'),
+        'current_sort': request.GET.get('sort', 'newest'),
+        'show_forks_sort': True,
     })
 
 @login_required
@@ -165,6 +177,30 @@ def create_note_view(request):
     else:
         form = NoteForm()
     return render(request, 'notes/create_note.html', {'form': form})
+
+@login_required
+def edit_note_view(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    if request.user != note.author:
+        return redirect('note_detail', pk=pk)
+    if request.method == 'POST':
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.save()
+            tags_input = form.cleaned_data.get('tags_input', '')
+            note.tags.clear()
+            if tags_input:
+                from .models import Tag
+                tag_names = [t.strip().lower() for t in tags_input.split(',') if t.strip()]
+                for tag_name in tag_names:
+                    tag, _ = Tag.objects.get_or_create(name=tag_name)
+                    note.tags.add(tag)
+            return redirect('note_detail', pk=note.pk)
+    else:
+        existing_tags = ', '.join(note.tags.values_list('name', flat=True))
+        form = NoteForm(instance=note, initial={'tags_input': existing_tags})
+    return render(request, 'notes/edit_note.html', {'form': form, 'note': note})
 
 @login_required
 def rate_note_view(request, pk):

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Edit note{% endblock title %}
+{% block content %}
+    <div class="create-note-page">
+        <div class="create-note-header">
+            <a href="{{ request.META.HTTP_REFERER|default:'/' }}"
+               class="back-link"
+               onclick="event.preventDefault(); history.back();">⬅ Back</a>
+            <h1>Edit note</h1>
+        </div>
+        <form method="post" class="create-note-form">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <div class="help-text">{{ field.help_text }}</div>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="submit-btn">Save changes</button>
+        </form>
+    </div>
+{% endblock content %}

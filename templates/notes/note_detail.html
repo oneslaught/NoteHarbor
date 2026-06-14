@@ -92,6 +92,7 @@
             {% if request.user == note.author or request.user.profile.is_admin %}
                 <div class="sidebar-card">
                     <h3>Danger zone</h3>
+                    <a href="{% url 'edit_note' note.pk %}" class="action-btn edit-btn">Edit note</a>
                     <a href="{% url 'delete_note' note.pk %}"
                        class="action-btn btn-danger delete-note">Delete note</a>
                 </div>

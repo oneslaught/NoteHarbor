@@ -21,7 +21,7 @@
     </head>
     <body>
         <div class="sidebar">
-            <div class="logo">Note<span>Harbor</span></div>
+            <div class="logo"><a href="{% url 'home' %}">Note<span>Harbor</span></a></div>
             <a href="{% url 'home' %}"
                class="nav-item {% block nav_home %}{% endblock nav_home %}">Home</a>
             <a href="{% url 'explore' %}"
