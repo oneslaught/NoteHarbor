@@ -1,8 +1,10 @@
+from multiprocessing import context
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Note, SavedNote
 from .filters import filter_notes, get_filter_context, get_selected_tags_json, get_tags_json
 from .forms import NoteForm
+from .models import Note, SavedNote, Rating
 
 
 def home_view(request):
@@ -12,14 +14,14 @@ def home_view(request):
         context['forks_count'] = Note.objects.filter(author=request.user, original_note__isnull=False).count()
         context['notes_count'] = Note.objects.filter(author=request.user, original_note__isnull=True).count()
         context['recent_saved'] = Note.objects.filter(saved_by__user=request.user).order_by('-saved_by__saved_at')[:3]
-        context['recent_notes'] = Note.objects.filter(author=request.user, original_note__isnull=True).order_by('-created_at')[:3]
+        context['recent_notes'] = Note.objects.filter(author=request.user, original_note__isnull=True).order_by('-created_at')[:6]
     return render(request, 'notes/home.html', context)
-
 
 def note_detail_view(request, pk):
     note = get_object_or_404(Note, pk=pk)
     is_saved = False
     can_fork = False
+    user_rating = 0
     if request.user.is_authenticated:
         is_saved = SavedNote.objects.filter(user=request.user, note=note).exists()
         root_note = note.original_note if note.is_fork else note
@@ -27,10 +29,13 @@ def note_detail_view(request, pk):
             root_note.author != request.user and
             not Note.objects.filter(author=request.user, original_note=root_note).exists()
         )
+        rating = Rating.objects.filter(user=request.user, note=note).first()
+        user_rating = rating.score if rating else 0
     return render(request, 'notes/note_detail.html', {
         'note': note,
         'is_saved': is_saved,
         'can_fork': can_fork,
+        'user_rating': user_rating,
     })
 
 
@@ -160,3 +165,17 @@ def create_note_view(request):
     else:
         form = NoteForm()
     return render(request, 'notes/create_note.html', {'form': form})
+
+@login_required
+def rate_note_view(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    if request.method == 'POST':
+        score = request.POST.get('score')
+        if score and score.isdigit() and 1 <= int(score) <= 5:
+            from .models import Rating
+            Rating.objects.update_or_create(
+                user=request.user,
+                note=note,
+                defaults={'score': int(score)}
+            )
+    return redirect('note_detail', pk=pk)

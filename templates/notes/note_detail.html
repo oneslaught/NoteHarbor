@@ -4,7 +4,9 @@
 {% endblock title %}
 {% block content %}
     <div class="note-detail">
-        <a href="{% url 'home' %}" class="back-link">⬅ Back</a>
+        <a href="{{ request.META.HTTP_REFERER|default:'/' }}"
+           class="back-link"
+           onclick="event.preventDefault(); history.back();">⬅ Back</a>
         <div class="note-body">
             <div class="note-body-header">
                 <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
@@ -47,6 +49,24 @@
                             {% endif %}
                         </button>
                     </form>
+                    {% if request.user.is_authenticated and request.user != note.author %}
+                        <div class="sidebar-card">
+                            <h3>Rate this note</h3>
+                            <form method="post"
+                                  action="{% url 'rate_note' note.pk %}"
+                                  class="rating-form">
+                                {% csrf_token %}
+                                <div class="rating-stars">
+                                    {% for i in "12345" %}
+                                        <button type="submit"
+                                                name="score"
+                                                value="{{ i }}"
+                                                class="star-btn {% if user_rating >= i|add:0 %}active{% endif %}">★</button>
+                                    {% endfor %}
+                                </div>
+                            </form>
+                        </div>
+                    {% endif %}
                     {% if can_fork %}
                         <form method="post" action="{% url 'fork_note' note.pk %}">
                             {% csrf_token %}
@@ -72,7 +92,8 @@
             {% if request.user == note.author or request.user.profile.is_admin %}
                 <div class="sidebar-card">
                     <h3>Danger zone</h3>
-                    <a href="{% url 'delete_note' note.pk %}" class="action-btn btn-danger delete-note">Delete note</a>
+                    <a href="{% url 'delete_note' note.pk %}"
+                       class="action-btn btn-danger delete-note">Delete note</a>
                 </div>
             {% endif %}
         </div>

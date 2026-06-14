@@ -15,6 +15,9 @@
                         {% endfor %}
                     </div>
                 {% endfor %}
+                {% if form.non_field_errors %}
+                    <div class="error">Invalid username or password.</div>
+                {% endif %}
                 <button type="submit" class="submit-btn">Log in</button>
             </form>
             <div class="auth-link">

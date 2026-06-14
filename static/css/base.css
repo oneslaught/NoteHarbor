@@ -68,3 +68,9 @@ a {
 .dot-blue {
   background-color: #4f8ef7;
 }
+
+/* Login Error Message */
+
+.error {
+  margin-bottom: 12px;
+}

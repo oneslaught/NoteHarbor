@@ -80,6 +80,7 @@
 }
 
 .note-detail .sidebar-card {
+  text-align: center;
   background-color: #1a1d27;
   border: 1px solid #2a2d3e;
   border-radius: 16px;
@@ -92,6 +93,10 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 12px;
+}
+
+.note-detail .sidebar-card .rating-form {
+  display: inline-block;
 }
 
 .note-detail .tags-list {
@@ -161,4 +166,30 @@
 .note-detail .action-btn.delete-note:hover {
   background-color: #e05252;
   color: #ffffff;
+}
+
+/* For rating */
+
+.rating-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #2a2d3e;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.1s;
+}
+
+.star-btn:hover,
+.star-btn.active {
+  color: #f5c518;
+}
+
+.star-btn:hover ~ .star-btn {
+  color: #2a2d3e;
 }

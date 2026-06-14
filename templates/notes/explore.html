@@ -18,10 +18,12 @@
                         <span class="dot dot-green"></span>
                         {{ note.average_rating|default:"—" }}
                     </span>
-                    <span class="stat">
-                        <span class="dot dot-blue"></span>
-                        {{ note.fork_count }} forks
-                    </span>
+                    {% if not note.is_fork %}
+                        <span class="stat">
+                            <span class="dot dot-blue"></span>
+                            {{ note.fork_count }} forks
+                        </span>
+                    {% endif %}
                 </div>
             </a>
         {% empty %}
