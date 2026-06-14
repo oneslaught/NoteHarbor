@@ -64,13 +64,12 @@
   border-top: 1px solid #2a2d3e;
 }
 
-.note-footer .rating {
-  font-size: 15px;
-  color: #f5c518;
-}
-
+.note-footer .rating,
 .note-footer .forks {
-  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
   color: #9aa0b4;
 }
 
@@ -112,27 +111,54 @@
 
 .note-detail .action-btn {
   width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #2a2d3e;
-  background-color: #23263a;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+  background-color: #4f8ef7;
   color: #ffffff;
   font-size: 14px;
   cursor: pointer;
   text-align: center;
   display: block;
   margin-bottom: 8px;
+  transition: all 0.2s;
+  font-weight: 500;
 }
 
 .note-detail .action-btn:hover {
-  background-color: #2e3250;
+  background-color: #2d5291;
+  color: #ffffff;
 }
 
 .note-detail .action-btn.primary {
-  background-color: #4f8ef7;
-  border-color: #4f8ef7;
+  background-color: #eab40a;
+  border-color: #6b5100;
+  color: #ffffff;
 }
 
 .note-detail .action-btn.primary:hover {
-  background-color: #3a7be0;
+  background-color: #af890c;
+  border-color: #efc129;
+}
+
+.note-detail .action-btn.remove {
+  background-color: transparent;
+  border-color: #cf450b;
+  color: #a23607;
+}
+
+.note-detail .action-btn.remove:hover {
+  background-color: #cb521e;
+  color: #ffffff;
+}
+
+.note-detail .action-btn.delete-note {
+  background-color: transparent;
+  border-color: #e05252;
+  color: #e05252;
+}
+
+.note-detail .action-btn.delete-note:hover {
+  background-color: #e05252;
+  color: #ffffff;
 }

@@ -9,7 +9,7 @@
             <div class="note-body-header">
                 <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
                 {% if note.is_fork %}
-                    <span class="fork-info">🔀 forked from
+                    <span class="fork-info">forked from
                         <a href="{% url 'note_detail' note.original_note.pk %}">{{ note.original_note.title }}</a>
                     </span>
                 {% endif %}
@@ -20,9 +20,15 @@
             </p>
             <div class="note-content">{{ note.content|linebreaks }}</div>
             <div class="note-footer">
-                <span class="rating">⭐ {{ note.average_rating|default:"No ratings yet" }}</span>
+                <span class="rating">
+                    <span class="dot dot-green"></span>
+                    {{ note.average_rating|default:"No ratings yet" }}
+                </span>
                 {% if not note.is_fork %}
-                    <span class="forks">🔀 {{ note.fork_count }} forks</span>
+                    <span class="forks">
+                        <span class="dot dot-blue"></span>
+                        {{ note.fork_count }} forks
+                    </span>
                 {% endif %}
             </div>
         </div>
@@ -32,18 +38,19 @@
                     <h3>Actions</h3>
                     <form method="post" action="{% url 'toggle_favorite' note.pk %}">
                         {% csrf_token %}
-                        <button type="submit" class="action-btn primary">
+                        <button type="submit"
+                                class="action-btn {% if is_saved %}remove{% else %}primary{% endif %}">
                             {% if is_saved %}
-                                ❌ Remove from favorites
+                                Remove from favorites
                             {% else %}
-                                🤍 Save to favorites
+                                Save to favorites
                             {% endif %}
                         </button>
                     </form>
                     {% if can_fork %}
                         <form method="post" action="{% url 'fork_note' note.pk %}">
                             {% csrf_token %}
-                            <button type="submit" class="action-btn">🔀 Fork this note</button>
+                            <button type="submit" class="action-btn">Fork this note</button>
                         </form>
                     {% endif %}
                 </div>
@@ -65,7 +72,7 @@
             {% if request.user == note.author or request.user.profile.is_admin %}
                 <div class="sidebar-card">
                     <h3>Danger zone</h3>
-                    <a href="{% url 'delete_note' note.pk %}" class="action-btn btn-danger">🗑 Delete note</a>
+                    <a href="{% url 'delete_note' note.pk %}" class="action-btn btn-danger delete-note">Delete note</a>
                 </div>
             {% endif %}
         </div>

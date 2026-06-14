@@ -2,6 +2,86 @@
 {% block title %}Home{% endblock title %}
 {% block nav_home %}active{% endblock nav_home %}
 {% block content %}
-    <h1>Welcome to NoteHarbor</h1>
-    <p class="page-subtitle">Doing some reinovation...</p>
+    {% if request.user.is_authenticated %}
+        <div class="home-header">
+            <div class="home-header-top">
+                <div>
+                    <h1>Welcome back, {{ request.user.username }}</h1>
+                    <p class="page-subtitle">Here's what's happening with your notes</p>
+                </div>
+                <a href="{% url 'create_note' %}" class="hero-btn primary">Create new note</a>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ notes_count }}</div>
+                <div class="stat-label">Notes created</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ saved_count }}</div>
+                <div class="stat-label">Notes saved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ forks_count }}</div>
+                <div class="stat-label">Forks made</div>
+            </div>
+        </div>
+        <div class="home-section">
+            <div class="home-section-header">
+                <h2>Recently saved</h2>
+                <a href="{% url 'favorites' %}">View all ➡</a>
+            </div>
+            <div class="notes-grid">
+                {% for note in recent_saved %}
+                    <a href="{% url 'note_detail' note.pk %}" class="note-card">
+                        <div>
+                            <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
+                        </div>
+                        <div class="note-title">{{ note.title }}</div>
+                        <div class="note-meta">by {{ note.author.username }} · {{ note.created_at|timesince }} ago</div>
+                        <div class="note-stats">
+                            <span class="stat"><span class="dot dot-green"></span>{{ note.average_rating|default:"—" }}</span>
+                            <span class="stat"><span class="dot dot-blue"></span>{{ note.fork_count }} forks</span>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="page-subtitle"><a href="{% url 'explore' %}">No saved notes yet. Click here to explore notes</a></p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="home-section">
+            <div class="home-section-header">
+                <h2>Your recent notes</h2>
+                <a href="{% url 'my_notes' %}">View all ➡</a>
+            </div>
+            <div class="notes-grid">
+                {% for note in recent_notes %}
+                    <a href="{% url 'note_detail' note.pk %}" class="note-card">
+                        <div>
+                            <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
+                        </div>
+                        <div class="note-title">{{ note.title }}</div>
+                        <div class="note-meta">by {{ note.author.username }} · {{ note.created_at|timesince }} ago</div>
+                        <div class="note-stats">
+                            <span class="stat"><span class="dot dot-green"></span>{{ note.average_rating|default:"—" }}</span>
+                            <span class="stat"><span class="dot dot-blue"></span>{{ note.fork_count }} forks</span>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="page-subtitle">
+                        <a href="{% url 'create_note' %}">No notes yet. Create your first note</a>
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="home-hero">
+            <h1>Welcome to Note<span class="text-blue">Harbor</span></h1>
+            <p>A place to create, share and discover notes with other students</p>
+            <div class="hero-actions">
+                <a href="{% url 'register' %}" class="hero-btn primary">Get started</a>
+                <a href="{% url 'explore' %}" class="hero-btn">Explore notes</a>
+            </div>
+        </div>
+    {% endif %}
 {% endblock content %}

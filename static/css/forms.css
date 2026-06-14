@@ -91,3 +91,70 @@
 .auth-card .auth-link a {
   color: #4f8ef7;
 }
+
+/* Note Creation page */
+
+.create-note-page {
+    max-width: 800px;
+}
+
+.create-note-header {
+    margin-bottom: 32px;
+}
+
+.create-note-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+.create-note-form .form-group {
+    margin-bottom: 20px;
+}
+
+.create-note-form label {
+    display: block;
+    font-size: 14px;
+    color: #9aa0b4;
+    margin-bottom: 8px;
+}
+
+.create-note-form input[type="text"],
+.create-note-form textarea,
+.create-note-form select {
+    width: 100%;
+    padding: 10px 14px;
+    background-color: #1a1d27;
+    border: 1px solid #2a2d3e;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.create-note-form input[type="text"]:focus,
+.create-note-form textarea:focus,
+.create-note-form select:focus {
+    outline: none;
+    border-color: #4f8ef7;
+}
+
+.create-note-form textarea {
+    resize: vertical;
+    min-height: 300px;
+}
+
+.create-note-form .submit-btn {
+    padding: 12px 32px;
+    background-color: #4f8ef7;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.create-note-form .submit-btn:hover {
+    background-color: #3a7be0;
+}

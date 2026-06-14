@@ -11,4 +11,5 @@ urlpatterns = [
     path('my-forks/', views.my_forks_view, name='my_forks'),
     path('my-notes/', views.my_notes_view, name='my_notes'),
     path('notes/<int:pk>/delete/', views.delete_note_view, name='delete_note'),
+    path('notes/create/', views.create_note_view, name='create_note'),
 ]

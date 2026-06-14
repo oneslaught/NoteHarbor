@@ -2,21 +2,18 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Note, SavedNote
 from .filters import filter_notes, get_filter_context, get_selected_tags_json, get_tags_json
+from .forms import NoteForm
 
 
 def home_view(request):
-    notes = Note.objects.all().order_by('-created_at')
-    courses, tags = get_filter_context(notes)
-    notes = filter_notes(notes, request)
-    return render(request, 'notes/home.html', {
-        'notes': notes,
-        'courses': courses,
-        'tags': tags,
-        'tags_json': get_tags_json(tags),
-        'selected_tags_json': get_selected_tags_json(request, tags),
-        'current_course': request.GET.get('course'),
-        'current_tag': request.GET.get('tag'),
-    })
+    context = {}
+    if request.user.is_authenticated:
+        context['saved_count'] = SavedNote.objects.filter(user=request.user).count()
+        context['forks_count'] = Note.objects.filter(author=request.user, original_note__isnull=False).count()
+        context['notes_count'] = Note.objects.filter(author=request.user, original_note__isnull=True).count()
+        context['recent_saved'] = Note.objects.filter(saved_by__user=request.user).order_by('-saved_by__saved_at')[:3]
+        context['recent_notes'] = Note.objects.filter(author=request.user, original_note__isnull=True).order_by('-created_at')[:3]
+    return render(request, 'notes/home.html', context)
 
 
 def note_detail_view(request, pk):
@@ -143,3 +140,23 @@ def delete_note_view(request, pk):
         note.delete()
         return redirect('home')
     return render(request, 'notes/delete_note.html', {'note': note})
+
+@login_required
+def create_note_view(request):
+    if request.method == 'POST':
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.author = request.user
+            note.save()
+            tags_input = form.cleaned_data.get('tags_input', '')
+            if tags_input:
+                from .models import Tag
+                tag_names = [t.strip().lower() for t in tags_input.split(',') if t.strip()]
+                for tag_name in tag_names:
+                    tag, _ = Tag.objects.get_or_create(name=tag_name)
+                    note.tags.add(tag)
+            return redirect('note_detail', pk=note.pk)
+    else:
+        form = NoteForm()
+    return render(request, 'notes/create_note.html', {'form': form})

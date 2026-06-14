@@ -48,7 +48,23 @@ a {
 }
 
 .page-subtitle {
-    color: #9aa0b4;
-    font-size: 14px;
-    margin-top: 4px;
+  color: #9aa0b4;
+  margin-top: 4px;
+}
+
+/* Rating and Forking dots */
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.dot-green {
+  background-color: #3ab87a;
+}
+.dot-blue {
+  background-color: #4f8ef7;
 }
