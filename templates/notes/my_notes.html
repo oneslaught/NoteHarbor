@@ -1,35 +1,74 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% trans "My Notes" %}{% endblock title %}
+{% block title %}
+    {% trans "My Notes" %}
+{% endblock title %}
 {% block nav_notes %}active{% endblock nav_notes %}
 {% block content %}
-    {% include "notes/partials/search.html" %}
-    <h1>{% trans "My notes" %}</h1>
-    <p class="page-subtitle">{{ notes.count }} {% trans "notes" %}</p>
-    {% include "notes/partials/filters.html" %}
-    <div class="notes-grid">
-        {% for note in notes %}
-            <a href="{% url 'note_detail' note.pk %}" class="note-card">
-                <div>
-                    <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
+    <div x-data="{ query: '', results: null, searching: false, async search() { if (this.query.length < 2) { this.results = null; this.searching = false; return; } this.searching = true; const lang = document.documentElement.lang; const response = await fetch(`/${lang}/search/?q=${encodeURIComponent(this.query)}&context=my_notes`); const data = await response.json(); this.results = data.results; } }">
+        <div class="topbar">
+            <div class="search-wrapper">
+                <input
+                    type="text"
+                    x-model="query"
+                    @input.debounce.300ms="search()"
+                    {# djlint:off T002 #}
+                    placeholder="{% trans 'Search by note name...' %}"
+                    {# djlint:on T002 #}
+                    class="search-input"
+                    >
                 </div>
-                <div class="note-title">{{ note.title }}</div>
-                <div class="note-meta">{% trans "by" %} {{ note.author.username }} · {{ note.created_at|timesince }} {% trans "ago" %}</div>
-                <div class="note-stats">
-                    <span class="stat">
-                        <span class="dot dot-green"></span>
-                        {{ note.average_rating|default:"—" }}
-                    </span>
-                    {% if not note.is_fork %}
-                        <span class="stat">
-                            <span class="dot dot-blue"></span>
-                            {{ note.fork_count }} {% trans "forks" %}
-                        </span>
-                    {% endif %}
+            </div>
+            <h1>{% trans "My notes" %}</h1>
+            <p class="page-subtitle">{{ notes.count }} {% trans "notes" %}</p>
+            <div x-show="!searching">
+                {% include "notes/partials/filters.html" %}
+                <div class="notes-grid">
+                    {% for note in notes %}
+                        <a href="{% url 'note_detail' note.pk %}" class="note-card">
+                            <div>
+                                <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
+                            </div>
+                            <div class="note-title">{{ note.title }}</div>
+                            <div class="note-meta">{% trans "by" %} {{ note.author.username }} · {{ note.created_at|timesince }} {% trans "ago" %}</div>
+                            <div class="note-stats">
+                                <span class="stat"><span class="dot dot-green"></span>{{ note.average_rating|default:"—" }}</span>
+                                <span class="stat"><span class="dot dot-blue"></span>{{ note.fork_count }} {% trans "forks" %}</span>
+                            </div>
+                        </a>
+                    {% empty %}
+                        <p>{% trans "No notes yet." %}</p>
+                    {% endfor %}
                 </div>
-            </a>
-        {% empty %}
-            <p>{% trans "No notes yet." %}</p>
-        {% endfor %}
-    </div>
-{% endblock content %}
+            </div>
+            <div x-show="searching" class="notes-grid">
+                <template x-for="note in results" :key="note.id">
+                    <a :href="`/${document.documentElement.lang}/notes/${note.id}/`"
+                       class="note-card">
+                        <div>
+                            <span class="course-badge"
+                                  :class="`course-badge-${note.course_id}`"
+                                  x-text="note.course"></span>
+                        </div>
+                        <div class="note-title" x-text="note.title"></div>
+                        <div class="note-meta" x-text="`by ${note.author}`"></div>
+                        <div class="note-stats">
+                            <span class="stat">
+                                <span class="dot dot-green"></span>
+                                <span x-text="note.average_rating || '—'"></span>
+                            </span>
+                            <template x-if="!note.is_fork">
+                                <span class="stat">
+                                    <span class="dot dot-blue"></span>
+                                    <span x-text="`${note.fork_count} forks`"></span>
+                                </span>
+                            </template>
+                        </div>
+                    </a>
+                </template>
+                <template x-if="results && results.length === 0">
+                    <p class="page-subtitle">{% trans "No notes found." %}</p>
+                </template>
+            </div>
+        </div>
+    {% endblock content %}

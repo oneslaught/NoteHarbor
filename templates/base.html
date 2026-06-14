@@ -12,6 +12,7 @@
                 src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <title>{% block title %}NoteHarbor{% endblock title %}</title>
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/search.css' %}">
         <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
         <link rel="stylesheet" href="{% static 'css/cards.css' %}">
         <link rel="stylesheet" href="{% static 'css/note_detail.css' %}">
@@ -36,7 +37,13 @@
             <div class="user-info">
                 {% if request.user.is_authenticated %}
                     <div class="username">{{ request.user.username }}</div>
-                    <div class="role">{{ request.user.profile.role|capfirst }}</div>
+                    <div class="role">
+                        {% if request.user.profile.role == 'admin' %}
+                            {% trans "Admin" %}
+                        {% else %}
+                            {% trans "Student" %}
+                        {% endif %}
+                    </div>
                     <a href="{% url 'logout' %}" class="logout-btn">{% trans "Log out" %}</a>
                 {% else %}
                     <a href="{% url 'login' %}">{% trans "Log in" %}</a>

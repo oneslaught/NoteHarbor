@@ -1,5 +1,5 @@
 from multiprocessing import context
-
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .filters import filter_notes, get_filter_context, get_selected_tags_json, get_tags_json, sort_notes
@@ -71,6 +71,7 @@ def favorites_view(request):
         'current_tag': request.GET.get('tag'),
         'current_sort': request.GET.get('sort', 'newest'),
         'show_forks_sort': True,
+        'search_context': 'favorites',
     })
     
 def explore_view(request):
@@ -88,6 +89,7 @@ def explore_view(request):
         'current_tag': request.GET.get('tag'),
         'current_sort': request.GET.get('sort', 'newest'),
         'show_forks_sort': True,
+        'search_context': 'all',
     })
 
 @login_required
@@ -128,6 +130,7 @@ def my_forks_view(request):
         'current_tag': request.GET.get('tag'),
         'current_sort': request.GET.get('sort', 'newest'),
         'show_forks_sort': False,
+        'search_context': 'my_forks',
     })
     
 @login_required
@@ -146,6 +149,7 @@ def my_notes_view(request):
         'current_tag': request.GET.get('tag'),
         'current_sort': request.GET.get('sort', 'newest'),
         'show_forks_sort': True,
+        'search_context': 'my_notes',
     })
 
 @login_required
@@ -215,3 +219,32 @@ def rate_note_view(request, pk):
                 defaults={'score': int(score)}
             )
     return redirect('note_detail', pk=pk)
+
+def search_notes_view(request):
+    query = request.GET.get('q', '')
+    context = request.GET.get('context', 'all')
+    if context == 'favorites' and request.user.is_authenticated:
+        notes = Note.objects.filter(saved_by__user=request.user)
+    elif context == 'my_notes' and request.user.is_authenticated:
+        notes = Note.objects.filter(author=request.user, original_note__isnull=True)
+    elif context == 'my_forks' and request.user.is_authenticated:
+        notes = Note.objects.filter(author=request.user, original_note__isnull=False)
+    else:
+        notes = Note.objects.all()
+    if query:
+        notes = notes.filter(title__icontains=query)
+    notes = notes[:10]
+    results = [
+        {
+            'id': note.pk,
+            'title': note.title,
+            'author': note.author.username,
+            'course': note.course.name,
+            'course_id': note.course.id,
+            'average_rating': note.average_rating(),
+            'fork_count': note.fork_count,
+            'is_fork': note.is_fork,
+        }
+        for note in notes
+    ]
+    return JsonResponse({'results': results})

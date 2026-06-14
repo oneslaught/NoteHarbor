@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-14 21:05+0000\n"
+"POT-Creation-Date: 2026-06-14 23:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,8 +42,7 @@ msgstr "Пишіть свою нотатку тут..."
 msgid "Title"
 msgstr "Назва"
 
-#: notes/forms.py:21 templates/notes/partials/filters.html:4
-#: templates/notes/partials/filters_full.html:13
+#: notes/forms.py:21
 msgid "Course"
 msgstr "Курс"
 
@@ -56,40 +55,44 @@ msgid "Home"
 msgstr "Головна"
 
 #: templates/base.html:29 templates/notes/explore.html:4
-#, fuzzy
-#| msgid "Explore notes"
 msgid "Explore"
-msgstr "Оглянути нотатки"
+msgstr "Оглянути"
 
 #: templates/base.html:31 templates/notes/favorites.html:3
-#, fuzzy
-#| msgid "Favorite notes"
 msgid "Favorites"
-msgstr "Обрані Нотатки"
+msgstr "Обрані нотатки"
 
 #: templates/base.html:33 templates/notes/my_forks.html:7
 msgid "My forks"
-msgstr "Мої Форки"
+msgstr "Мої форки"
 
 #: templates/base.html:35 templates/notes/my_notes.html:7
 msgid "My notes"
 msgstr "Мої нотатки"
 
-#: templates/base.html:40
+#: templates/base.html:41
+msgid "Admin"
+msgstr "Адміністратор"
+
+#: templates/base.html:43
+msgid "Student"
+msgstr "Студент"
+
+#: templates/base.html:46
 msgid "Log out"
 msgstr "Вийти"
 
-#: templates/base.html:42 templates/users/login.html:22
+#: templates/base.html:48 templates/users/login.html:22
 #: templates/users/register.html:25
 msgid "Log in"
 msgstr "Увійти"
 
-#: templates/base.html:43 templates/users/login.html:25
+#: templates/base.html:49 templates/users/login.html:25
 #: templates/users/register.html:3 templates/users/register.html:22
 msgid "Register"
 msgstr "Зареєструватися"
 
-#: templates/base.html:49
+#: templates/base.html:55
 msgid "Language"
 msgstr "Мова"
 
@@ -268,10 +271,9 @@ msgid "My Notes"
 msgstr "Мої нотатки"
 
 #: templates/notes/my_notes.html:8
-#, fuzzy
 #| msgid "My notes"
 msgid "notes"
-msgstr "Мої нотатки"
+msgstr "нотатки"
 
 #: templates/notes/note_detail.html:15
 msgid "forked from"
@@ -309,21 +311,27 @@ msgstr "Створенно"
 msgid "Danger zone"
 msgstr "Зона ризику"
 
-#: templates/notes/partials/filters.html:6
-#: templates/notes/partials/filters_full.html:6
-#: templates/notes/partials/filters_full.html:15
+#: templates/notes/partials/filters.html:5
+#: templates/notes/partials/filters_full.html:14
+#| msgid "Course"
+msgid "Course:"
+msgstr "Курс:"
+
+#: templates/notes/partials/filters.html:7
+#: templates/notes/partials/filters_full.html:7
+#: templates/notes/partials/filters_full.html:16
 msgid "All"
 msgstr "Усі"
 
-#: templates/notes/partials/filters_full.html:4
+#: templates/notes/partials/filters_full.html:5
 msgid "Type"
 msgstr "Тип"
 
-#: templates/notes/partials/filters_full.html:8
+#: templates/notes/partials/filters_full.html:9
 msgid "Notes"
 msgstr "Нотатки"
 
-#: templates/notes/partials/filters_full.html:10
+#: templates/notes/partials/filters_full.html:11
 msgid "Forks"
 msgstr "Форки"
 
@@ -333,27 +341,28 @@ msgstr "Форки"
 msgid "Search by note name..."
 msgstr "Шукати нотатку за ім'ям..."
 
-#: templates/notes/partials/sort.html:3
-msgid "Sort"
-msgstr "Сортувати"
+#: templates/notes/partials/sort.html:4
+#| msgid "Sort"
+msgid "Sort:"
+msgstr "Сортувати:"
 
-#: templates/notes/partials/sort.html:5
+#: templates/notes/partials/sort.html:6
 msgid "Newest"
 msgstr "Найновіші"
 
-#: templates/notes/partials/sort.html:7
+#: templates/notes/partials/sort.html:8
 msgid "Oldest"
 msgstr "Найдавніші"
 
-#: templates/notes/partials/sort.html:9
+#: templates/notes/partials/sort.html:10
 msgid "Highest rated"
 msgstr "Найліпші за рейтингом"
 
-#: templates/notes/partials/sort.html:11
+#: templates/notes/partials/sort.html:12
 msgid "Lowest rated"
 msgstr "Найгірші за рейтингом"
 
-#: templates/notes/partials/sort.html:14
+#: templates/notes/partials/sort.html:15
 msgid "Most forked"
 msgstr "Більш форків"
 

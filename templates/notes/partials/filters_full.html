@@ -1,20 +1,21 @@
 {% load i18n %}
+{% load url_utils %}
 <div class="filters">
    <div class="filter-group">
       <span class="filter-label">{% trans "Type" %}:</span>
-      <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}type="
+      <a href="?{% url_replace type='' %}"
          class="filter-pill {% if not request.GET.type %}active{% endif %}">{% trans "All" %}</a>
-      <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}type=notes"
+      <a href="?{% url_replace type='notes' %}"
          class="filter-pill {% if request.GET.type == 'notes' %}active{% endif %}">{% trans "Notes" %}</a>
-      <a href="?{% if request.GET.course %}course={{ request.GET.course }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}type=forks"
+      <a href="?{% url_replace type='forks' %}"
          class="filter-pill {% if request.GET.type == 'forks' %}active{% endif %}">{% trans "Forks" %}</a>
    </div>
    <div class="filter-group">
-      <span class="filter-label">{% trans "Course" %}:</span>
-      <a href="?{% if request.GET.type %}type={{ request.GET.type }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}"
+      <span class="filter-label">{% trans "Course:" %}</span>
+      <a href="?{% url_replace course='' %}"
          class="filter-pill {% if not current_course %}active{% endif %}">{% trans "All" %}</a>
       {% for course in courses %}
-         <a href="?{% if request.GET.type %}type={{ request.GET.type }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}course={{ course.id }}"
+         <a href="?{% url_replace course=course.id %}"
             class="filter-pill {% if current_course == course.id|stringformat:'s' %}active{% endif %}">
             {{ course.name }}
          </a>

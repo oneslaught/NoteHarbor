@@ -1,11 +1,12 @@
 {% load i18n %}
+{% load url_utils %}
 <div class="filters">
     <div class="filter-group">
-        <span class="filter-label">{% trans "Course" %}:</span>
-        <a href="?{% if request.GET.search %}search={{ request.GET.search }}{% endif %}"
+        <span class="filter-label">{% trans "Course:" %}</span>
+        <a href="?{% url_replace course='' %}"
            class="filter-pill {% if not current_course %}active{% endif %}">{% trans "All" %}</a>
         {% for course in courses %}
-            <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}course={{ course.id }}"
+            <a href="?{% url_replace course=course.id %}"
                class="filter-pill {% if current_course == course.id|stringformat:'s' %}active{% endif %}">
                 {{ course.name }}
             </a>

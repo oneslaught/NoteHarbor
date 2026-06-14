@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Home" %}{% endblock title %}
+{% block title %}
+    {% trans "Home" %}
+{% endblock title %}
 {% block nav_home %}active{% endblock nav_home %}
 {% block content %}
     {% if request.user.is_authenticated %}
