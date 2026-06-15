@@ -10,6 +10,11 @@
               content="{% block meta_keywords %}notes, collaboration, productivity, organization, study{% endblock meta_keywords %}">
         <script defer
                 src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="{% static 'js/tag_filter.js' %}"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap"
+              rel="stylesheet">
         <title>{% block title %}NoteHarbor{% endblock title %}</title>
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/search.css' %}">
