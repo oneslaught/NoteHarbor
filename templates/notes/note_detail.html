@@ -25,7 +25,11 @@
             <div class="note-footer">
                 <span class="rating">
                     <span class="dot dot-green"></span>
-                    {{ note.average_rating|default:"No ratings yet" }}
+                    {% if note.average_rating %}
+                        {{ note.average_rating }}
+                    {% else %}
+                        {% trans "No ratings yet" %}
+                    {% endif %}
                 </span>
                 {% if not note.is_fork %}
                     <span class="forks">

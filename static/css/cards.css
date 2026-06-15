@@ -47,7 +47,7 @@ a.note-card {
   background-color: #e05252;
 } /* red */
 .course-badge-3 {
-  background-color: #3ab87a;
+  background-color: #048528;
 } /* green */
 .course-badge-4 {
   background-color: #9b59b6;
@@ -58,6 +58,15 @@ a.note-card {
 .course-badge-6 {
   background-color: #e91e8c;
 } /* pink */
+.course-badge-7 {
+  background-color: #321ee9;
+} /* dark-blue */
+.course-badge-8 {
+  background-color: #7402a8;
+} /* dark-purple */
+.course-badge-9 {
+  background-color: #0ed9a3;
+} /* cyan */
 
 .note-card .note-title {
   font-size: 16px;
