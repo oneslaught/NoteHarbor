@@ -1,3 +1,5 @@
+from multiprocessing import context
+
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -184,7 +186,7 @@ def create_note_view(request):
 @login_required
 def edit_note_view(request, pk):
     note = get_object_or_404(Note, pk=pk)
-    if request.user != note.author:
+    if request.user != note.author and not request.user.profile.is_admin:
         return redirect('note_detail', pk=pk)
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
