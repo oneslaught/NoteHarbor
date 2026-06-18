@@ -46,10 +46,18 @@ def toggle_favorite_view(request, pk):
     saved = SavedNote.objects.filter(user=request.user, note=note)
     if saved.exists():
         saved.delete()
+        is_saved = False
     else:
         SavedNote.objects.create(user=request.user, note=note)
+        is_saved = True
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return JsonResponse({'is_saved': is_saved})
     return redirect('note_detail', pk=pk)
 
+def get_saved_note_ids(user):
+    if user.is_authenticated:
+        return list(SavedNote.objects.filter(user=user).values_list('note_id', flat=True))
+    return []
 
 @login_required
 def favorites_view(request):
@@ -73,6 +81,7 @@ def favorites_view(request):
         'current_sort': request.GET.get('sort', 'newest'),
         'show_forks_sort': True,
         'search_context': 'favorites',
+        'saved_note_ids': get_saved_note_ids(request.user),
     })
     
 def explore_view(request):
@@ -91,6 +100,7 @@ def explore_view(request):
         'current_sort': request.GET.get('sort', 'newest'),
         'show_forks_sort': True,
         'search_context': 'all',
+        'saved_note_ids': get_saved_note_ids(request.user),
     })
 
 @login_required
@@ -132,6 +142,7 @@ def my_forks_view(request):
         'current_sort': request.GET.get('sort', 'newest'),
         'show_forks_sort': False,
         'search_context': 'my_forks',
+        'saved_note_ids': get_saved_note_ids(request.user),
     })
     
 @login_required
@@ -151,6 +162,7 @@ def my_notes_view(request):
         'current_sort': request.GET.get('sort', 'newest'),
         'show_forks_sort': True,
         'search_context': 'my_notes',
+        'saved_note_ids': get_saved_note_ids(request.user),
     })
 
 @login_required
@@ -160,6 +172,8 @@ def delete_note_view(request, pk):
         return redirect('note_detail', pk=pk)
     if request.method == 'POST':
         note.delete()
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({'deleted': True})
         return redirect('home')
     return render(request, 'notes/delete_note.html', {'note': note})
 

@@ -183,6 +183,8 @@
 
 .rating-stars {
   display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
   gap: 4px;
 }
 
@@ -197,10 +199,10 @@
 }
 
 .star-btn:hover,
-.star-btn.active {
+.star-btn:hover ~ .star-btn {
   color: #f5c518;
 }
 
-.star-btn:hover ~ .star-btn {
-  color: #2a2d3e;
+.star-btn.active {
+  color: #f5c518;
 }

@@ -17,6 +17,7 @@ a.note-card {
 }
 
 .note-card {
+  position: relative;
   background-color: #1a1d27;
   border: 1px solid #2a2d3e;
   border-radius: 12px;
@@ -93,4 +94,78 @@ a.note-card {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+.note-card {
+  position: relative;
+}
+
+.card-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.note-card:hover .card-actions {
+  opacity: 1;
+}
+
+.card-action-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+  background-color: #23263a;
+}
+
+.card-action-btn:hover {
+  transform: scale(1.15);
+}
+
+.card-action-btn.favorite-btn {
+  color: #9aa0b4;
+  font-size: 14px;
+}
+
+.card-action-btn.favorite-btn.saved {
+  background-color: #2e3250;
+  color: #f5c518;
+}
+
+.card-action-btn.delete-btn {
+  color: #9aa0b4;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.card-action-btn.delete-btn:hover {
+  background-color: #e05252;
+  color: #ffffff;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.card-action-btn.pop {
+  animation: pop 0.3s ease;
 }

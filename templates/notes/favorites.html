@@ -26,6 +26,7 @@
                 <div class="notes-grid">
                     {% for note in notes %}
                         <a href="{% url 'note_detail' note.pk %}" class="note-card">
+                            {% include 'notes/partials/card_actions.html' %}
                             <div>
                                 <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
                             </div>
@@ -47,6 +48,7 @@
                 <template x-for="note in results" :key="note.id">
                     <a :href="`/${document.documentElement.lang}/notes/${note.id}/`"
                        class="note-card">
+                        {% include "notes/partials/card_actions.html" %}
                         <div>
                             <span class="course-badge"
                                   :class="`course-badge-${note.course_id}`"

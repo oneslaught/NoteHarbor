@@ -37,6 +37,7 @@
             <div class="notes-grid">
                 {% for note in recent_saved %}
                     <a href="{% url 'note_detail' note.pk %}" class="note-card">
+                        {% include "notes/partials/card_actions.html" %}
                         <div>
                             <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
                         </div>
@@ -60,6 +61,7 @@
             <div class="notes-grid">
                 {% for note in recent_notes %}
                     <a href="{% url 'note_detail' note.pk %}" class="note-card">
+                        {% include "notes/partials/card_actions.html" %}
                         <div>
                             <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
                         </div>
