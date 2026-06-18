@@ -106,12 +106,8 @@ a.note-card {
   right: 12px;
   display: flex;
   gap: 6px;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.note-card:hover .card-actions {
   opacity: 1;
+  transition: opacity 0.2s;
 }
 
 .card-action-btn {
