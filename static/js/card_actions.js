@@ -1,24 +1,19 @@
 async function toggleFavorite(btn, pk, csrfToken) {
-  event.preventDefault();
-  event.stopPropagation();
-  const response = await fetch(
-    `/${document.documentElement.lang}/notes/${pk}/favorite/`,
-    {
-      method: "POST",
-      headers: {
-        "X-CSRFToken": csrfToken,
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    },
-  );
-  const data = await response.json();
-  btn.classList.add("pop");
-  setTimeout(() => btn.classList.remove("pop"), 300);
-  if (data.is_saved) {
-    btn.classList.add("saved");
-  } else {
-    btn.classList.remove("saved");
-  }
+    event.preventDefault();
+    event.stopPropagation();
+    const response = await fetch(`/${document.documentElement.lang}/notes/${pk}/favorite/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken,
+            'X-Requested-With': 'XMLHttpRequest',
+        }
+    });
+    const data = await response.json();
+    btn.classList.add('pop');
+    setTimeout(() => {
+        btn.classList.remove('pop');
+        window.location.reload();
+    }, 300);
 }
 
 async function deleteNote(btn, pk, csrfToken) {

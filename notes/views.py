@@ -16,6 +16,7 @@ def home_view(request):
         context['notes_count'] = Note.objects.filter(author=request.user, original_note__isnull=True).count()
         context['recent_saved'] = Note.objects.filter(saved_by__user=request.user).order_by('-saved_by__saved_at')[:3]
         context['recent_notes'] = Note.objects.filter(author=request.user, original_note__isnull=True).order_by('-created_at')[:6]
+        context['saved_note_ids'] = get_saved_note_ids(request.user)
     return render(request, 'notes/home.html', context)
 
 def note_detail_view(request, pk):
