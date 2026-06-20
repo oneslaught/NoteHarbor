@@ -8,9 +8,7 @@ djlint==1.39.2
 EditorConfig==0.17.1
 jsbeautifier==1.15.4
 json5==0.14.0
-mysqlclient==2.2.8
 pathspec==1.1.1
-pillow==12.2.0
 psycopg2-binary==2.9.12
 python-dotenv==1.2.2
 PyYAML==6.0.3
