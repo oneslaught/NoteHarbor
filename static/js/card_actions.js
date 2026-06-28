@@ -11,13 +11,17 @@ async function toggleNoteFavorite(btn, pk, csrfToken) {
   );
   const data = await response.json();
   if (data.is_saved) {
-    btn.classList.remove("primary");
-    btn.classList.add("remove");
-    btn.textContent = btn.dataset.removeText;
+    btn.classList.add("saved");
+    if (btn.dataset.removeText) {
+      btn.classList.remove("primary");
+      btn.textContent = btn.dataset.removeText;
+    }
   } else {
-    btn.classList.remove("remove");
-    btn.classList.add("primary");
-    btn.textContent = btn.dataset.saveText;
+    btn.classList.remove("saved");
+    if (btn.dataset.saveText) {
+      btn.classList.add("primary");
+      btn.textContent = btn.dataset.saveText;
+    }
   }
 }
 
@@ -43,3 +47,25 @@ async function deleteNote(btn, pk, csrfToken) {
     setTimeout(() => card.remove(), 300);
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".favorite-btn").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const pk = this.dataset.pk;
+      const csrf = this.dataset.csrf;
+      toggleNoteFavorite(this, pk, csrf);
+    });
+  });
+
+  document.querySelectorAll(".delete-btn").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const pk = this.dataset.pk;
+      const csrf = this.dataset.csrf;
+      deleteNote(this, pk, csrf);
+    });
+  });
+});
