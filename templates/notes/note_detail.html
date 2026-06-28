@@ -49,8 +49,8 @@
                     <h3>{% trans "Actions" %}</h3>
                     <button onclick="toggleNoteFavorite(this, {{ note.pk }}, '{{ csrf_token }}')"
                             class="action-btn {% if is_saved %}remove{% else %}primary{% endif %}"
-                            data-save-text="{% trans "Save to favorites" %}"
-                            data-remove-text="{% trans "Remove from favorites" %}">
+                            data-save-text="{% trans 'Save to favorites' %}"
+                            data-remove-text="{% trans 'Remove from favorites' %}">
                         {% if is_saved %}
                             {% trans "Remove from favorites" %}
                         {% else %}
