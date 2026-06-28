@@ -1,26 +1,68 @@
 {% load i18n %}
 {% load url_utils %}
-<div class="filters">
-   <div class="filter-group">
-      <span class="filter-label">{% trans "Type" %}:</span>
-      <a href="?{% url_replace type='' %}"
-         class="filter-pill {% if not request.GET.type %}active{% endif %}">{% trans "All" %}</a>
-      <a href="?{% url_replace type='notes' %}"
-         class="filter-pill {% if request.GET.type == 'notes' %}active{% endif %}">{% trans "Notes" %}</a>
-      <a href="?{% url_replace type='forks' %}"
-         class="filter-pill {% if request.GET.type == 'forks' %}active{% endif %}">{% trans "Forks" %}</a>
+<div x-data="{ open: window.innerWidth > 768 }">
+   <button @click="open = !open" class="filters-toggle">
+      <span>{% trans "Filters" %}</span>
+      <span x-text="open ? '▲' : '▼'"></span>
+   </button>
+   <div class="filters" x-show="open" x-transition>
+      <div class="filters-desktop">
+         <div class="filter-group">
+            <span class="filter-label">{% trans "Type:" %}</span>
+            <a href="?{% url_replace type='' %}"
+               class="filter-pill {% if not request.GET.type %}active{% endif %}">{% trans "All" %}</a>
+            <a href="?{% url_replace type='notes' %}"
+               class="filter-pill {% if request.GET.type == 'notes' %}active{% endif %}">{% trans "Notes" %}</a>
+            <a href="?{% url_replace type='forks' %}"
+               class="filter-pill {% if request.GET.type == 'forks' %}active{% endif %}">{% trans "Forks" %}</a>
+         </div>
+         <div class="filter-group">
+            <span class="filter-label">{% trans "Course:" %}</span>
+            <a href="?{% url_replace course='' %}"
+               class="filter-pill {% if not current_course %}active{% endif %}">{% trans "All" %}</a>
+            {% for course in courses %}
+               <a href="?{% url_replace course=course.id %}"
+                  class="filter-pill {% if current_course == course.id|stringformat:'s' %}active{% endif %}">
+                  {{ course.name }}
+               </a>
+            {% endfor %}
+         </div>
+         {% include "notes/partials/sort.html" %}
+         {% include "notes/partials/tag_filter.html" %}
+      </div>
+      <div class="filters-mobile">
+         <div class="mobile-filter-row">
+            <select onchange="window.location.href='?' + '&type=' + this.value"
+                    class="mobile-select">
+               <option value="">{% trans "Type: All" %}</option>
+               <option value="notes" {% if request.GET.type == 'notes' %}selected{% endif %}>{% trans "Notes" %}</option>
+               <option value="forks" {% if request.GET.type == 'forks' %}selected{% endif %}>{% trans "Forks" %}</option>
+            </select>
+            <select onchange="window.location.href='?' + '&course=' + this.value"
+                    class="mobile-select">
+               <option value="">{% trans "Course: All" %}</option>
+               {% for course in courses %}
+                  <option value="{{ course.id }}"
+                          {% if current_course == course.id|stringformat:'s' %}selected{% endif %}>{{ course.name }}</option>
+               {% endfor %}
+            </select>
+         </div>
+         <div class="mobile-filter-row">
+            <select onchange="window.location.href='?' + '&sort=' + this.value"
+                    class="mobile-select">
+               <option value="newest"
+                       {% if current_sort == 'newest' or not current_sort %}selected{% endif %}>{% trans "Newest" %}</option>
+               <option value="oldest" {% if current_sort == 'oldest' %}selected{% endif %}>{% trans "Oldest" %}</option>
+               <option value="highest_rated"
+                       {% if current_sort == 'highest_rated' %}selected{% endif %}>{% trans "Highest rated" %}</option>
+               <option value="lowest_rated"
+                       {% if current_sort == 'lowest_rated' %}selected{% endif %}>{% trans "Lowest rated" %}</option>
+               {% if show_forks_sort %}
+                  <option value="most_forked"
+                          {% if current_sort == 'most_forked' %}selected{% endif %}>{% trans "Most forked" %}</option>
+               {% endif %}
+            </select>
+         </div>
+      </div>
    </div>
-   <div class="filter-group">
-      <span class="filter-label">{% trans "Course:" %}</span>
-      <a href="?{% url_replace course='' %}"
-         class="filter-pill {% if not current_course %}active{% endif %}">{% trans "All" %}</a>
-      {% for course in courses %}
-         <a href="?{% url_replace course=course.id %}"
-            class="filter-pill {% if current_course == course.id|stringformat:'s' %}active{% endif %}">
-            {{ course.name }}
-         </a>
-      {% endfor %}
-   </div>
-   {% include "notes/partials/sort.html" %}
-   {% include "notes/partials/tag_filter.html" %}
 </div>

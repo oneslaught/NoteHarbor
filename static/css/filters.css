@@ -38,3 +38,34 @@
   border-color: #477edd;
   color: #ffffff;
 }
+
+.filters-toggle {
+  display: none;
+  width: 100%;
+  padding: 8px 14px;
+  background-color: #1a1d27;
+  border: 1px solid #2a2d3e;
+  border-radius: 8px;
+  color: #9aa0b4;
+  font-size: 14px;
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+
+.filters-toggle:hover {
+  border-color: #4f8ef7;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .filters-toggle {
+    display: flex;
+  }
+
+  .filters {
+    margin-top: 8px;
+  }
+}

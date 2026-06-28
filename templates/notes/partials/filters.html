@@ -1,17 +1,21 @@
 {% load i18n %}
 {% load url_utils %}
-<div class="filters">
-    <div class="filter-group">
-        <span class="filter-label">{% trans "Course:" %}</span>
-        <a href="?{% url_replace course='' %}"
-           class="filter-pill {% if not current_course %}active{% endif %}">{% trans "All" %}</a>
-        {% for course in courses %}
-            <a href="?{% url_replace course=course.id %}"
-               class="filter-pill {% if current_course == course.id|stringformat:'s' %}active{% endif %}">
+<div x-data="{ open: window.innerWidth > 768 }">
+    <button @click="open = !open" class="filters-toggle">
+        <span>{% trans "Filters" %}</span>
+        <span x-text="open ? '▲' : '▼'"></span>
+    </button>
+    <div class="filters" x-show="open" x-transition>
+        <div class="filter-group">
+            <span class="filter-label">{% trans "Course:" %}</span>
+            <a href="?{% url_replace course='' %}" class="filter-pill {% if not current_course %}active{% endif %}">{% trans "All" %}</a>
+            {% for course in courses %}
+            <a href="?{% url_replace course=course.id %}" class="filter-pill {% if current_course == course.id|stringformat:'s' %}active{% endif %}">
                 {{ course.name }}
             </a>
-        {% endfor %}
+            {% endfor %}
+        </div>
+        {% include "notes/partials/sort.html" %}
+        {% include "notes/partials/tag_filter.html" %}
     </div>
-    {% include "notes/partials/sort.html" %}
-    {% include "notes/partials/tag_filter.html" %}
 </div>

@@ -12,6 +12,7 @@
                 src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <script src="{% static 'js/tag_filter.js' %}"></script>
         <script src="{% static 'js/card_actions.js' %}"></script>
+        <script src="{% static 'js/sidebar_toggle.js' %}"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap"
@@ -26,20 +27,32 @@
         <link rel="stylesheet" href="{% static 'css/filters.css' %}">
         <link rel="stylesheet" href="{% static 'css/delete_alert.css' %}">
         <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     </head>
     <body>
-        <div class="sidebar">
-            <div class="logo"><a href="{% url 'home' %}">Note<span>Harbor</span></a></div>
-            <a href="{% url 'home' %}"
-               class="nav-item {% block nav_home %}{% endblock nav_home %}">{% trans "Home" %}</a>
-            <a href="{% url 'explore' %}"
-               class="nav-item {% block nav_explore %}{% endblock nav_explore %}">{% trans "Explore" %}</a>
-            <a href="{% url 'favorites' %}"
-               class="nav-item {% block nav_favorites %}{% endblock nav_favorites %}">{% trans "Favorites" %}</a>
-            <a href="{% url 'my_forks' %}"
-               class="nav-item {% block nav_forks %}{% endblock nav_forks %}">{% trans "My forks" %}</a>
-            <a href="{% url 'my_notes' %}"
-               class="nav-item {% block nav_notes %}{% endblock nav_notes %}">{% trans "My notes" %}</a>
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-toprow">
+                <div class="logo"><a href="{% url 'home' %}">Note<span>Harbor</span></a></div>
+                <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+                    {# djlint:off H020 #}
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    {# djlint:on H020 #}
+                </button>
+            </div>
+            <div class="sidebar-nav">
+                <a href="{% url 'home' %}"
+                   class="nav-item {% block nav_home %}{% endblock nav_home %}">{% trans "Home" %}</a>
+                <a href="{% url 'explore' %}"
+                   class="nav-item {% block nav_explore %}{% endblock nav_explore %}">{% trans "Explore" %}</a>
+                <a href="{% url 'favorites' %}"
+                   class="nav-item {% block nav_favorites %}{% endblock nav_favorites %}">{% trans "Favorites" %}</a>
+                <a href="{% url 'my_forks' %}"
+                   class="nav-item {% block nav_forks %}{% endblock nav_forks %}">{% trans "My forks" %}</a>
+                <a href="{% url 'my_notes' %}"
+                   class="nav-item {% block nav_notes %}{% endblock nav_notes %}">{% trans "My notes" %}</a>
+            </div>
             <div class="user-info">
                 {% if request.user.is_authenticated %}
                     <div class="username">{{ request.user.username }}</div>
