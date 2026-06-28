@@ -51,7 +51,7 @@
   cursor: pointer;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin: 10px 0;
   transition: border-color 0.2s;
 }
 

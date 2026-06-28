@@ -1,6 +1,8 @@
 {% load i18n %}
 {% load url_utils %}
-<div x-data="{ open: window.innerWidth > 768 }">
+<div x-data="{ open: window.innerWidth > 768
+   {% if request.GET.course or request.GET.type or request.GET.sort or request.GET.tag %}|| true{% endif %}
+   }">
    <button @click="open = !open" class="filters-toggle">
       <span>{% trans "Filters" %}</span>
       <span x-text="open ? '▲' : '▼'"></span>
@@ -63,6 +65,7 @@
                {% endif %}
             </select>
          </div>
+         <div class="mobile-filter-row">{% include "notes/partials/tag_filter.html" %}</div>
       </div>
    </div>
 </div>

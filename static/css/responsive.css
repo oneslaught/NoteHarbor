@@ -6,6 +6,62 @@
   display: contents;
 }
 
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.hamburger span {
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
+}
+
+.filters-mobile {
+  display: none;
+}
+
+.filters-desktop {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.mobile-select {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  padding: 8px 12px;
+  background-color: #1a1d27;
+  border: 1px solid #2a2d3e;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.mobile-select:focus {
+  outline: none;
+  border-color: #4f8ef7;
+}
+
 @media (max-width: 1500px) {
   .notes-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -163,70 +219,52 @@
   h1 {
     font-size: 22px;
   }
-}
 
-.hamburger.active span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-.hamburger span {
-  transition:
-    transform 0.3s,
-    opacity 0.3s;
-}
-
-.filters-mobile {
-  display: none;
-}
-
-.filters-desktop {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.mobile-filter-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  width: 100%;
-  padding-top: 10px;
-}
-
-.mobile-select {
-  flex: 1;
-  min-width: 0;
-  max-width: 100%;
-  padding: 8px 12px;
-  background-color: #1a1d27;
-  border: 1px solid #2a2d3e;
-  border-radius: 8px;
-  color: #ffffff;
-  font-size: 13px;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.mobile-select:focus {
-  outline: none;
-  border-color: #4f8ef7;
-}
-
-@media (max-width: 768px) {
   .filters-mobile {
     display: block;
   }
 
   .filters-desktop {
     display: none;
+  }
+
+  .card-actions {
+    display: none;
+  }
+
+  /* For note-details */
+  .note-body h1 {
+    font-size: 20px;
+  }
+
+  .note-content {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .note-detail .sidebar-card {
+    padding: 14px;
+  }
+
+  .note-detail .sidebar-card h3 {
+    font-size: 11px;
+  }
+
+  .note-detail .action-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .star-btn {
+    font-size: 20px;
+  }
+
+  .note-footer .rating,
+  .note-footer .forks {
+    font-size: 13px;
+  }
+
+  .note-author {
+    font-size: 12px;
   }
 }

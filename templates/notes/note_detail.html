@@ -5,9 +5,13 @@
 {% endblock title %}
 {% block content %}
     <div class="note-detail">
-        <a href="{{ request.META.HTTP_REFERER|default:'/' }}"
+        {# djlint:off H019 #}
+        <a href="javascript:history.back()"
            class="back-link"
-           onclick="event.preventDefault(); history.back();">⬅ {% trans "Back" %}</a>
+           onclick="event.preventDefault(); history.back(); window.addEventListener('pageshow', function(e) { if (e.persisted) window.location.reload(); }, {once: true});">
+            ⬅ {% trans "Back" %}
+        </a>
+        {# djlint:on H019 #}
         <div class="note-body">
             <div class="note-body-header">
                 <span class="course-badge course-badge-{{ note.course.id }}">{{ note.course.name }}</span>
@@ -43,17 +47,16 @@
             {% if request.user.is_authenticated %}
                 <div class="sidebar-card">
                     <h3>{% trans "Actions" %}</h3>
-                    <form method="post" action="{% url 'toggle_favorite' note.pk %}">
-                        {% csrf_token %}
-                        <button type="submit"
-                                class="action-btn {% if is_saved %}remove{% else %}primary{% endif %}">
-                            {% if is_saved %}
-                                {% trans "Remove from favorites" %}
-                            {% else %}
-                                {% trans "Save to favorites" %}
-                            {% endif %}
-                        </button>
-                    </form>
+                    <button onclick="toggleNoteFavorite(this, {{ note.pk }}, '{{ csrf_token }}')"
+                            class="action-btn {% if is_saved %}remove{% else %}primary{% endif %}"
+                            data-save-text="{% trans "Save to favorites" %}"
+                            data-remove-text="{% trans "Remove from favorites" %}">
+                        {% if is_saved %}
+                            {% trans "Remove from favorites" %}
+                        {% else %}
+                            {% trans "Save to favorites" %}
+                        {% endif %}
+                    </button>
                     {% if request.user.is_authenticated and request.user != note.author %}
                         <div class="sidebar-card">
                             <h3>{% trans "Rate this note" %}</h3>
@@ -92,7 +95,7 @@
             </div>
             <div class="sidebar-card">
                 <h3>{% trans "Created" %}</h3>
-                <div class="tag">📅 {{ note.created_at|date:"d M Y" }}</div>
+                <div class="tag">{{ note.created_at|date:"d M Y" }}</div>
             </div>
             {% if request.user == note.author or request.user.profile.is_admin %}
                 <div class="sidebar-card">
