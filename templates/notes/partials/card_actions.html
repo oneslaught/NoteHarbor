@@ -1,7 +1,7 @@
 {% if request.user.is_authenticated %}
     <div class="card-actions">
         <button class="card-action-btn favorite-btn {% if note.pk in saved_note_ids %}saved{% endif %}"
-                onclick="toggleFavorite(this, {{ note.pk }}, '{{ csrf_token }}')">★</button>
+                onclick="toggleNoteFavorite(this, {{ note.pk }}, '{{ csrf_token }}')">★</button>
         {% if request.user == note.author or request.user.profile.is_admin %}
             <button class="card-action-btn delete-btn"
                     onclick="deleteNote(this, {{ note.pk }}, '{{ csrf_token }}')">✕</button>
