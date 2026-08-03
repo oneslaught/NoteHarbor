@@ -141,8 +141,8 @@ msgstr "Зберегти зміни"
 
 #: templates/notes/explore.html:16 templates/notes/favorites.html:16
 #: templates/notes/my_forks.html:16 templates/notes/my_notes.html:16
-msgid "Search by note name..."
-msgstr "Шукати нотатку за ім'ям..."
+msgid "Search by note title..."
+msgstr "Шукати нотатку за назвою..."
 
 #: templates/notes/explore.html:22 templates/notes/home.html:94
 msgid "Explore notes"

@@ -14,7 +14,7 @@
             <a href="?{% url_replace type='' %}"
                class="filter-pill {% if not request.GET.type %}active{% endif %}">{% trans "All" %}</a>
             <a href="?{% url_replace type='notes' %}"
-               class="filter-pill {% if request.GET.type == 'notes' %}active{% endif %}">{% trans "Notes" %}</a>
+               class="filter-pill {% if request.GET.type == 'notes' %}active{% endif %}">{% trans "Original Notes" %}</a>
             <a href="?{% url_replace type='forks' %}"
                class="filter-pill {% if request.GET.type == 'forks' %}active{% endif %}">{% trans "Forks" %}</a>
          </div>
