@@ -59,7 +59,7 @@ Finally I added responsive design with CSS media queries and a collapsible hambu
 
 During this project, I have picked up some important skills and overall have better understanding of:
 
-### ⛓️ Django ORM:
+### ⛓️ Django ORM
 Before this project I thought of databases in terms of raw SQL. Working with QuerySets taught me to think in terms of chained filters and lazy evaluation; the database isn't touched until you actually iterate over results, which changed how I structure my views entirely.
 ### 📚 Django i18n
 I never implemented localization before. It was pretty easy to add another language using django-parler library, not that scary as I thought it might be.
@@ -70,7 +70,7 @@ This one is the most important of them all. Working with ALLOWED_HOSTS, .env fil
 ### ⚙️ MVC architecture 
 Separating concerns between models, views and templates felt abstract at first, but, by the end, having reusable filters.py, partials in templates and clean views made the codebase genuinely easier to extend and reason about.
 
-## 📈 Overall Growth:
+## 📈 Overall Growth
 This project pushed me from knowing Python syntax to actually building and shipping a full-stack web application. While working on this project, I was able to understand how a real system is structured: how data flows from the database through business logic to the user interface, how authentication and permissions work, how to handle multiple languages, and how to deploy something that other people can actually use. But I must say that most importantly, I have improved at breaking a complex problem into smaller pieces and solving them one at a time.
 
 ## 💡 How this project can be improved?
